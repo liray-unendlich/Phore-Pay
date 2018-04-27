@@ -84,10 +84,23 @@ h2 {
     margin: 0;
     padding: 0;
 }
-input[type=text]{
-  width:250px;
+input[type=text] {
+  width:210px;
   height:30px;
   font-size:1.3em;
+  line-height:30px;
+  vertical-align: middle;
+  position: relative;
+}
+ul li {
+  list-style: none;
+  margin-top: 10px;
+  margin-left: -40px;
+}
+label {
+  margin-right: 10px;
+  width: 100px;
+  float: left;
 }
 html {
   font-size: 100%;
@@ -117,11 +130,17 @@ html {
   <form>
     <div class="settings">
       <span class="set-title">支払い設定</span>
-      <p>請求額 &thinsp; ：<input id="fee" type="text" size="10" >&nbsp;円</p><br>
-      <p>支払い先：<input id="user" type="text" size="10" >&nbsp;へ支払う</p><br>
-      <p><big>支払う予定のPhore： <span id="bill"><b></b></span> PHR</big></p>
-      <br>
+      <ul>
+        <li class="fee">
+          <label for="fee">請求額</label>:&nbsp;<input id="fee" type="text" size="10">&nbsp;円
+        </li>
+        <li class="user">
+          <label for="user">支払い先</label>:&nbsp;<input id="user" type="text" size="10">&nbsp;へ支払う
+        </li>
+      </ul>
+      <p><big>支払い枚数: <span id="bill"><b></b></span> PHR</big></p>
     </div>
+  </form>
     <div>
       <input id="request" type="button" value="リクエスト" style="WIDTH:200px; HEIGHT:50px">
     </div>
@@ -179,7 +198,6 @@ html {
       });
     });
   </script>
-  </form>
 <div class="howpay">
   <span class="how-title">支払い方法</span>
 <p>
