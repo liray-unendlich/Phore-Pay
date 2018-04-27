@@ -128,8 +128,7 @@ html {
         alert("入力されていません");
       } else if(!$("#fee").val().match(/^[0-9]+$/)) {
         alert("数字のみ入力してください");
-      }
-      if($("#user").val()==""){
+      } else if($("#user").val()==""){
         alert("入力されていません");
       }
       var fee = $("#fee").val();
