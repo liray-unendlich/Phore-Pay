@@ -89,13 +89,14 @@ html {
       <span class="set-title">支払い設定</span>
       <p>請求額 &thinsp; ：<input id="fee" type="text" size="10" >&nbsp;円</p><br>
       <p>支払い先：<input id="user" type="text" size="10" >&nbsp;へ支払う</p><br>
-      <p>支払う予定のPhore： <span id="bill"><b></b></span> PHR</p>
+      <p><big>支払う予定のPhore： <span id="bill"><b></b></span> PHR</big></p>
       <br>
     </div>
     <div>
       <input id="request" type="button" value="リクエスト" style="WIDTH:200px; HEIGHT:50px">
     </div>
-  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="jquery.qrcode.min.js"></script>
   <script>
     $(function() {
       $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
@@ -122,13 +123,37 @@ html {
           }
         });
       }, 10000);
+    $('#request').click(function() {
+      if($("#fee").val()==""){
+        alert("入力されていません");
+      } else if(!$("#fee").val().match(/^[0-9]+$/)) {
+        alert("数字のみ入力してください");
+      }
+      if($("#user").val()==""){
+        alert("入力されていません");
+      }
+      var fee = $("#fee").val();
+      var n = 3;
+      var user = $("#user").val();
+      var bill = fee / result;
+      $("#qrcode").html("");
+      var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
+      $('#bill').html("<b>"+charge+"</b>");
+      var message = "@tipsensu tip phr " + charge + " " + user;
+      var url = "twitter://post?message=" + encodeURIComponent(message);
+      $("#url").html(url);
+      $("#qrcode").qrcode({width: 200, height: 200, text: url});
+      var target = document.getElementById("twitter");
+      target.href = url;
+      target.innerText = "Twitterで支払う";
+      });
     });
   </script>
   </form>
 <div class="settings">
   <span class="set-title">支払い方法</span>
 <p>
-1. 支払い設定へ支払い額, 支払い先を入力<br>
+1. 支払い設定へ支払い額, 支払い先(Twitterアカウント名)を入力<br>
 2. 請求ボタンをクリック<br>
 3. 支払い者がページを開いている場合<br>
 　 下に表示される"Twitterで支払う"リンクをクリック<br>
@@ -142,28 +167,7 @@ html {
   <br>
 </div>
 <div id="qrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;"></div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="jquery.qrcode.min.js"></script>
-<script>
-$(function() {
-  $('#request').click(function() {
-    $("#qrcode").html("");
-    var fee = $("#fee").val();
-    var n = 3;
-    var user = $("#user").val();
-    var bill = fee / result;
-    var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
-    $('#bill').html("<b>"+charge+"</b>");
-    var message = "@tipsensu tip phr " + charge + " " + user;
-    var url = "twitter://post?message=" + encodeURIComponent(message);
-    $("#url").html(url);
-    $("#qrcode").qrcode({width: 200, height: 200, text: url});
-    var target = document.getElementById("twitter");
-    target.href = url;
-    target.innerText = "Twitterで支払う";
-  });
-});
-</script>
+
 <div class="settings">
   <span class="set-title">説明・注意</span>
   <p>
