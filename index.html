@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Phore Pay</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="jquery.qrcode.min.js"></script>
+</head>
+<body>
+<form>
+  <div>
+    <label for="fee">請求額：</label><br />
+    <input id="fee" type="text" size="10" />&nbsp;円<br>
+    <input id="user" type="text" size="10" />&nbsp; へ支払う<br>
+    <input id="search" type="button" value="請求" />
+</div>
+  現在のPhoreの価格: <span id="rate"></span> 円
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script>
+  $(function() {
+    $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
+    .done(function(data) {
+      if (data[0].id) {
+        result = data[0].price_jpy;
+        var n = 1;
+        rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
+        $('#rate').html(rate);
+      } else {
+        $('#rate').html('価格が取得できません。');
+      }
+    });
+    setInterval(function(){
+      $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
+      .done(function(data) {
+        if (data[0].id) {
+          result = data[0].price_jpy;
+          var n = 1;
+          rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
+          $('#rate').html(rate);
+        } else {
+          $('#rate').html('価格が取得できません。');
+        }
+      });
+    }, 10000);
+  });
+</script>
+  <div>
+    <label for="bill">必要な枚数(PHR)： <span id="bill"></span> PHR</label><br />
+  </div>
+</form>
+<div id="qrcode"></div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="jquery.qrcode.min.js"></script>
+<script>
+$(function() {
+  $('#search').click(function() {
+    $("#qrcode").html("");
+    var fee = $("#fee").val();
+    var n = 3;
+    var user = $("#user").val();
+    var bill = fee / result;
+    var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
+    $('#bill').html(charge);
+    var message = "@tipsensu tip phr " + charge + " " + user;
+    var url = "twitter://post?message=" + encodeURIComponent(message);
+    $("#url").html(url);
+    $("#qrcode").qrcode(url);
+    var target = document.getElementById("twitter");
+    target.href = url;
+    target.innerText = "Twitterで支払う";
+  });
+});
+</script>
+<a id="twitter">支払い用リンク</div>
+</body>
+</html>
