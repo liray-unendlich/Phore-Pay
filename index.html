@@ -5,6 +5,7 @@
 <title>Phore Pay</title>
 <style>
 h1 {
+  font-family: "Avenir", "Arial";
   line-height: 1.4;
   border-bottom: solid 3px #000000;
 }
@@ -25,8 +26,42 @@ h2 {
   border-color: #00d188;
   color: #00d188;
 }
+.settings {
+    position: relative;
+    margin: 2em 0;
+    padding: 1em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+    font-weight: bold;
+}
+.settings .set-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 19px;
+    background: #FFF;
+    color: #95ccff;
+    font-weight: bold;
+}
+.settings p {
+    margin: 0;
+    padding: 0;
+}
+.link_button {
+  font-weight: bold;/*太字に*/
+  text-decoration: none;/*下線消す*/
+  background: skyblue;/*背景を水色に*/
+  color:white;/*文字を白に*/
+  padding:5px 10px;/*内側の余白*/
+  border-radius: 20px;/*角を丸くする*/
+  font-family: 'Avenir','Arial';/*フォントをいい感じに*/
+  }
 html {
   font-size: 100%;
+  font-family: "Avenir", "Meiryo UI" ,'Osaka',"MS Pゴシック", sans-serif;
 
   // 600px以降から、100pxごとに1px大きくなる
   @media (min-width: 600px) {
@@ -49,16 +84,16 @@ html {
     <h1 class="title">Phore Pay</h1></font>
   </span>
   <p>現在のPhoreの価格: <span id="rate"></span> 円</p>
-  <div id="subtitle"><h2>支払い設定</h2></div>
   <form>
+    <div class="settings">
+      <span class="set-title">支払い設定</span>
+      <p>請求額 &thinsp; ：<input id="fee" type="text" size="10" >&nbsp;円</p><br>
+      <p>支払い先：<input id="user" type="text" size="10" >&nbsp;へ支払う</p><br>
+      <p>支払う予定のPhore： <span id="bill"><b></b></span> PHR</p>
+      <br>
+    </div>
     <div>
-      <label for="fee">請求額　：</label><input id="fee" type="text" size="10" />&nbsp;円<br>
-      <label for="user">支払い先：</label><input id="user" type="text" size="10" />&nbsp;へ支払う<br>
-      <br>
-      <label for="bill">支払う予定のPhore： <span id="bill"><b></b></span> PHR</label>
-      <br>
-      <br>
-      <input id="request" type="button" value="請求" style="WIDTH:100px; HEIGHT:50px">
+      <input id="request" type="button" value="リクエスト" style="WIDTH:200px; HEIGHT:50px">
     </div>
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script>
@@ -90,8 +125,8 @@ html {
     });
   </script>
   </form>
-<br>
-<div id="pay"><h2>支払い方法</h2></div>
+<div class="settings">
+  <span class="set-title">支払い方法</span>
 <p>
 1. 支払い設定へ支払い額, 支払い先を入力<br>
 2. 請求ボタンをクリック<br>
@@ -100,8 +135,9 @@ html {
 　 そうでない場合QRを読み込みツイート<br>
 4. ツイッターのリプライ画面で支払いを確認<br>
 </p>
+</div>
 <div>
-  <a id="twitter"></a>
+  <a class="link_button" id="twitter"></a>
   <br>
   <br>
 </div>
