@@ -1,77 +1,136 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
+<meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Phore Pay</title>
+<style>
+h1 {
+  line-height: 1.4;
+  border-bottom: solid 3px #000000;
+}
+h2 {
+  line-height: 1.0;
+  font-size: 1.0em;
+}
+#request {
+  font-size: 1.4em;
+  font-weight: bold;
+  background-color: #00d188;
+  border: 2px solid #00d188;
+  color: #fff;
+  line-height: 50px;
+}
+#request:hover {
+  background-color: #fff;
+  border-color: #00d188;
+  color: #00d188;
+}
+html {
+  font-size: 100%;
+
+  // 600px以降から、100pxごとに1px大きくなる
+  @media (min-width: 600px) {
+    font-size: calc(112.5% + 4 * (100vw - 600px) / 400)
+  }
+
+  // 1,000px以上は、22pxに
+  @media (min-width: 1000px) {
+    font-size: calc(137.5%)
+  }
+}
+</style>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="jquery.qrcode.min.js"></script>
 </head>
 <body>
-<form>
-  <div>
-    <label for="fee">請求額：</label><br />
-    <input id="fee" type="text" size="10" />&nbsp;円<br>
-    <input id="user" type="text" size="10" />&nbsp; へ支払う<br>
-    <input id="search" type="button" value="請求" />
-</div>
-  現在のPhoreの価格: <span id="rate"></span> 円
+  <span id="logo"><img src="logo.png" width="40" height="46.4649" align="left" hspace="10"></span>
+  <span id="title">
+    <font face="Arial" size="4">
+    <h1 class="title">Phore Pay</h1></font>
+  </span>
+  <p>現在のPhoreの価格: <span id="rate"></span> 円</p>
+  <div id="subtitle"><h2>支払い設定</h2></div>
+  <form>
+    <div>
+      <label for="fee">請求額　：</label><input id="fee" type="text" size="10" />&nbsp;円<br>
+      <label for="user">支払い先：</label><input id="user" type="text" size="10" />&nbsp;へ支払う<br>
+      <br>
+      <label for="bill">支払う予定のPhore： <span id="bill"><b></b></span> PHR</label>
+      <br>
+      <br>
+      <input id="request" type="button" value="請求" style="WIDTH:100px; HEIGHT:50px">
+    </div>
   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script>
-  $(function() {
-    $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
-    .done(function(data) {
-      if (data[0].id) {
-        result = data[0].price_jpy;
-        var n = 1;
-        rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-        $('#rate').html(rate);
-      } else {
-        $('#rate').html('価格が取得できません。');
-      }
-    });
-    setInterval(function(){
+    $(function() {
       $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
       .done(function(data) {
         if (data[0].id) {
           result = data[0].price_jpy;
           var n = 1;
           rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-          $('#rate').html(rate);
+          $('#rate').html("<b>"+rate+"</b>");
         } else {
           $('#rate').html('価格が取得できません。');
         }
       });
-    }, 10000);
-  });
-</script>
-  <div>
-    <label for="bill">必要な枚数(PHR)： <span id="bill"></span> PHR</label><br />
-  </div>
-</form>
-<div id="qrcode"></div>
+      setInterval(function(){
+        $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
+        .done(function(data) {
+          if (data[0].id) {
+            result = data[0].price_jpy;
+            var n = 1;
+            rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
+            $('#rate').html("<b>"+rate+"</b>");
+          } else {
+            $('#rate').html('価格が取得できません。');
+          }
+        });
+      }, 10000);
+    });
+  </script>
+  </form>
+<br>
+<div id="pay"><h2>支払い方法</h2></div>
+<p>
+1. 支払い設定へ支払い額, 支払い先を入力<br>
+2. 請求ボタンをクリック<br>
+3. 支払い者がページを開いている場合<br>
+　 下に表示される"Twitterで支払う"リンクをクリック<br>
+　 そうでない場合QRを読み込みツイート<br>
+4. ツイッターのリプライ画面で支払いを確認<br>
+</p>
+<div>
+  <a id="twitter"></a>
+  <br>
+  <br>
+</div>
+<div id="qrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;"></div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="jquery.qrcode.min.js"></script>
 <script>
 $(function() {
-  $('#search').click(function() {
+  $('#request').click(function() {
     $("#qrcode").html("");
     var fee = $("#fee").val();
     var n = 3;
     var user = $("#user").val();
     var bill = fee / result;
     var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
-    $('#bill').html(charge);
+    $('#bill').html("<b>"+charge+"</b>");
     var message = "@tipsensu tip phr " + charge + " " + user;
     var url = "twitter://post?message=" + encodeURIComponent(message);
     $("#url").html(url);
-    $("#qrcode").qrcode(url);
+    $("#qrcode").qrcode({width: 200, height: 200, text: url});
     var target = document.getElementById("twitter");
     target.href = url;
     target.innerText = "Twitterで支払う";
   });
 });
 </script>
-<a id="twitter">支払い用リンク</div>
+<div>
+  <br>
+
+</div>
 </body>
 </html>
