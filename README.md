@@ -20,9 +20,7 @@ Phore Pay とは、店舗などの少額支払いを受け付ける方々向け�
 ## お店の方の使い方
 0. 店舗用のツイッターアカウントを登録しましょう。
 1. まず Sensuのアカウントを登録しましょう。Twitterを開いていただき、@tipsensu というアカウントを探してください。
-2. アカウントを見つけたら、https://sensu.tips/terms?hl=ja より利用規約を確認して、同意できる方は agree とリプライを送りましょう。
-
-[ここ](https://twitter.com/intent/tweet?&text=%40tipsensu%20agree) をクリックすると直接agreeとリプライ出来ます。
+2. アカウントを見つけたら、https://sensu.tips/terms?hl=ja より利用規約を確認して、同意できる方は agree とリプライを送りましょう。[ここ](https://twitter.com/intent/tweet?&text=%40tipsensu%20agree) をクリックすると直接agreeとリプライ出来ます。
 3. https://liray-unendlich.github.io/Phore-Pay/ を開き、指示に従いQRを作成しましょう。
 4. 支払い者にQRを読み込んでいただき、支払いをお願いしてください。
 5. 支払いが完了すると、@tipsensu からリプライが飛んできます。
