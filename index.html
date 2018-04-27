@@ -13,19 +13,6 @@ h2 {
   line-height: 1.0;
   font-size: 1.0em;
 }
-#request {
-  font-size: 1.4em;
-  font-weight: bold;
-  background-color: #00d188;
-  border: 2px solid #00d188;
-  color: #fff;
-  line-height: 50px;
-}
-#request:hover {
-  background-color: #fff;
-  border-color: #00d188;
-  color: #00d188;
-}
 .settings {
     position: relative;
     font-size: 1.4em;
@@ -34,6 +21,7 @@ h2 {
     border: solid 3px #95ccff;
     border-radius: 8px;
     font-weight: bold;
+    margin-top: 30px;
 }
 .settings .set-title {
     position: absolute;
@@ -48,39 +36,6 @@ h2 {
     font-weight: bold;
 }
 .settings p {
-    margin: 0;
-    padding: 0;
-}
-.link_button {
-  font-weight: bold;/*太字に*/
-  text-decoration: none;/*下線消す*/
-  background: skyblue;/*背景を水色に*/
-  color:white;/*文字を白に*/
-  padding:5px 10px;/*内側の余白*/
-  border-radius: 20px;/*角を丸くする*/
-  font-family: 'Avenir','Arial';/*フォントをいい感じに*/
-}
-.howpay {
-    position: relative;
-    margin: 2em 0;
-    padding: 1em 1em;
-    border: solid 3px #95ccff;
-    border-radius: 8px;
-    font-weight: bold;
-}
-.howpay .how-title {
-    position: absolute;
-    display: inline-block;
-    top: -13px;
-    left: 10px;
-    padding: 0 9px;
-    line-height: 1;
-    font-size: 19px;
-    background: #FFF;
-    color: #95ccff;
-    font-weight: bold;
-}
-.howpay p {
     margin: 0;
     padding: 0;
 }
@@ -102,6 +57,55 @@ label {
   width: 100px;
   float: left;
 }
+#request {
+  font-size: 1.4em;
+  font-weight: bold;
+  background-color: #00d188;
+  border: 2px solid #00d188;
+  color: #fff;
+  line-height: 50px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+#request:hover {
+  background-color: #fff;
+  border-color: #00d188;
+  color: #00d188;
+}
+.howpay {
+    position: relative;
+    margin: 2em 0;
+    padding: 1em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.howpay .how-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 19px;
+    background: #FFF;
+    color: #95ccff;
+    font-weight: bold;
+}
+.howpay p {
+    margin: 0;
+    padding: 0;
+}
+.link_button {
+  font-weight: bold;/*太字に*/
+  text-decoration: none;/*下線消す*/
+  background: skyblue;/*背景を水色に*/
+  color:white;/*文字を白に*/
+  padding:5px 10px;/*内側の余白*/
+  border-radius: 20px;/*角を丸くする*/
+  font-family: 'Avenir','Arial';/*フォントをいい感じに*/
+}
 html {
   font-size: 100%;
   font-family: "Avenir", "Meiryo UI" ,'Osaka',"MS Pゴシック", sans-serif;
@@ -120,6 +124,60 @@ html {
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="jquery.qrcode.min.js"></script>
 </head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="jquery.qrcode.min.js"></script>
+<script>
+  $(function() {
+    $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
+    .done(function(data) {
+      if (data[0].id) {
+        result = data[0].price_jpy;
+        var n = 1;
+        rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
+        $('#rate').html("<b>"+rate+"</b>");
+      } else {
+        $('#rate').html('価格が取得できません。');
+      }
+    });
+    setInterval(function(){
+      $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
+      .done(function(data) {
+        if (data[0].id) {
+          result = data[0].price_jpy;
+          var n = 1;
+          rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
+          $('#rate').html("<b>"+rate+"</b>");
+        } else {
+          $('#rate').html('価格が取得できません。');
+        }
+      });
+    }, 10000);
+  $('#request').click(function() {
+    if($("#fee").val()==""){
+      alert("入力されていません");
+    } else if(!$("#fee").val().match(/^[0-9]+$/)) {
+      alert("数字のみ入力してください");
+    } else if($("#user").val()==""){
+      alert("入力されていません");
+    }
+
+    var fee = $("#fee").val();
+    var n = 3;
+    var user = $("#user").val();
+    var bill = fee / result;
+    $("#qrcode").html("");
+    var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
+    $('#bill').html("<b>"+charge+"</b>");
+    var message = "@tipsensu tip phr " + charge + " " + user;
+    var url = "twitter://post?message=" + encodeURIComponent(message);
+    $("#url").html(url);
+    $("#qrcode").qrcode({width: 200, height: 200, text: url});
+    var target = document.getElementById("twitter");
+    target.href = url;
+    target.innerText = "Twitterで支払う";
+    });
+  });
+</script>
 <body>
   <span id="logo"><img src="logo.png" width="40" height="46.4649" align="left" hspace="10"></span>
   <span id="title">
@@ -141,89 +199,33 @@ html {
       <p><big>支払い枚数: <span id="bill"><b></b></span> PHR</big></p>
     </div>
   </form>
-    <div>
-      <input id="request" type="button" value="リクエスト" style="WIDTH:200px; HEIGHT:50px">
-    </div>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <script src="jquery.qrcode.min.js"></script>
-  <script>
-    $(function() {
-      $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
-      .done(function(data) {
-        if (data[0].id) {
-          result = data[0].price_jpy;
-          var n = 1;
-          rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-          $('#rate').html("<b>"+rate+"</b>");
-        } else {
-          $('#rate').html('価格が取得できません。');
-        }
-      });
-      setInterval(function(){
-        $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
-        .done(function(data) {
-          if (data[0].id) {
-            result = data[0].price_jpy;
-            var n = 1;
-            rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-            $('#rate').html("<b>"+rate+"</b>");
-          } else {
-            $('#rate').html('価格が取得できません。');
-          }
-        });
-      }, 10000);
-    $('#request').click(function() {
-      if($("#fee").val()==""){
-        alert("入力されていません");
-      } else if(!$("#fee").val().match(/^[0-9]+$/)) {
-        alert("数字のみ入力してください");
-      } else if($("#user").val()==""){
-        alert("入力されていません");
-      }
+  <div>
+    <input id="request" type="button" value="リクエスト" style="WIDTH:200px; HEIGHT:50px">
+  </div>
+  <div class="howpay">
+    <span class="how-title">支払い方法</span>
+    <p>
+      1. 支払い設定へ支払い額, 支払い先(Twitterアカウント名)を入力<br>
+      2. 請求ボタンをクリック<br>
+      3. 支払い者がページを開いている場合<br>
+      　 下に表示される"Twitterで支払う"リンクをクリック<br>
+      　 そうでない場合QRを読み込みツイート<br>
+      4. ツイッターのリプライ画面で支払いを確認<br>
+    </p>
+  </div>
+  <div>
+    <a class="link_button" id="twitter"></a>
+  </div>
+  <div id="qrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;margin-top:20px;"></div>
 
-      var fee = $("#fee").val();
-      var n = 3;
-      var user = $("#user").val();
-      var bill = fee / result;
-      $("#qrcode").html("");
-      var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
-      $('#bill').html("<b>"+charge+"</b>");
-      var message = "@tipsensu tip phr " + charge + " " + user;
-      var url = "twitter://post?message=" + encodeURIComponent(message);
-      $("#url").html(url);
-      $("#qrcode").qrcode({width: 200, height: 200, text: url});
-      var target = document.getElementById("twitter");
-      target.href = url;
-      target.innerText = "Twitterで支払う";
-      });
-    });
-  </script>
-<div class="howpay">
-  <span class="how-title">支払い方法</span>
-<p>
-1. 支払い設定へ支払い額, 支払い先(Twitterアカウント名)を入力<br>
-2. 請求ボタンをクリック<br>
-3. 支払い者がページを開いている場合<br>
-　 下に表示される"Twitterで支払う"リンクをクリック<br>
-　 そうでない場合QRを読み込みツイート<br>
-4. ツイッターのリプライ画面で支払いを確認<br>
-</p>
-</div>
-<div>
-  <a class="link_button" id="twitter"></a>
-  <br>
-  <br>
-</div>
-<div id="qrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;"></div>
-
-<div class="howpay">
-  <span class="how-title">説明・注意</span>
-  <p>
-    この送金システムは https://sensu.tips の開発者によるチップシステムを利用しています。<br>
-    まずはSensu開発者の皆さま、このようなマルチプラットフォームでのチップシステムのご開発をありがとうございます。<br>
-    ご利用前に、必ず利用規約に同意されていることをご確認ください。
-    また、Twitterとの連携が出来ているかもご確認ください。
-  </p>
+  <div class="howpay">
+    <span class="how-title">説明・注意</span>
+    <p>
+      この送金システムは https://sensu.tips の開発者によるチップシステムを利用しています。<br>
+      まずはSensu開発者の皆さま、このようなマルチプラットフォームでのチップシステムのご開発をありがとうございます。<br>
+      ご利用前に、必ず利用規約に同意されていることをご確認ください。
+      また、Twitterとの連携が出来ているかもご確認ください。
+    </p>
   </div>
 </body>
 </html>
