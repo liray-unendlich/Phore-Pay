@@ -5,84 +5,20 @@
 <title>Phore Pay</title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script src="js/jquery.qrcode.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.1.0/css/drawer.min.css">
-<link rel="stylesheet" href="css/main.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.1.0/js/drawer.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
-  $(function() {
-    $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
-    .done(function(data) {
-      if (data[0].id) {
-        result = data[0].price_jpy;
-        var n = 1;
-        rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-        $('#rate').html("<b>"+rate+"</b>");
-      } else {
-        $('#rate').html('価格が取得できません。');
-      }
-    });
-    setInterval(function(){
-      $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
-      .done(function(data) {
-        if (data[0].id) {
-          result = data[0].price_jpy;
-          var n = 1;
-          rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-          $('#rate').html("<b>"+rate+"</b>");
-        } else {
-          $('#rate').html('価格が取得できません。');
-        }
-      });
-    }, 10000);
-
-  $('#request').click(function() {
-    if($("#fee").val()==""){
-      alert("入力されていません");
-    } else if(!$("#fee").val().match(/^[0-9]+$/)) {
-      alert("数字のみ入力してください");
-    } else if($("#user").val()==""){
-      alert("入力されていません");
-    }
-
-    var fee = $("#fee").val();
-    var n = 3;
-    var user = $("#user").val();
-    var bill = fee / result;
-    $("#qrcode").html("");
-    var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
-    $('#bill').html("<b>"+charge+"</b>");
-    var message = "./withdraw phr " + charge + " " + user;
-    var url = "line://msg/text/?" + encodeURIComponent(message);
-    $("#url").html(url);
-    $("#qrcode").qrcode({width: 200, height: 200, text: url});
-    var target = document.getElementById("twitter");
-    target.href = url;
-    target.innerText = "LINEで支払う";
-  });
-  $(document).ready(function() {
-    $(".drawer").drawer();
-  });
-
-  $(function openQRCamera(node) {
-    var reader = new FileReader();
-    reader.onload = function() {
-      node.value = "";
-      qrcode.callback = function(res) {
-        if(res instanceof Error) {
-          alert("QRコードが見つかりません。カメラの撮影範囲内にQRコードが存在することをお確かめください。");
-        } else {
-          node.parentNode.previousElementSibling.value = res;
-        }
-      };
-      qrcode.decode(reader.result);
-    };
-    reader.readAsDataURL(node.files[0]);
-  });
-});
-</script>
+<script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.1.0/css/drawer.min.css">
+<link rel="stylesheet" href="css/main.css">
 <style>
+input, label {
+  vertical-align: middle;
+}
+#qrcode-text-btn label {
+  float: right;
+  left: 50px;
+}
 .link_button {
   background-color: #00d188;
 }
@@ -97,42 +33,19 @@
   font-size: 15px;
   color: #5ae628;
 }
-.qrcode-text-btn {
-  display: none;
-}
+.qrcode-text {padding-right:1.7em; margin-right:0}
+.qrcode-text-btn {display:inline-block; background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat; height:1em; width:1.7em; margin-left:-1.7em; cursor:pointer}
+.qrcode-text-btn > input[type=file] {position:absolute; overflow:hidden; width:1px; height:1px; opacity:0}
 
 @media only screen and (max-device-width:750px) {
-  .qrcode-text {
-    padding-right:1.7em;
-    margin-right:0;
-    vertical-align:middle
-  }
-  .qrcode-text-btn {
-    display:inline-block;
-    background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat;
-    height:1em;
-    width:1.7em;
-    margin-right: 0px;
-    margin-left:-38px;
-    cursor:pointer;
-    vertical-align:middle
-  }
-  .qrcode-text-btn > input[type=file] {
-    position:absolute;
-    overflow:hidden;
-    width:1px;
-    height:1px;
-    opacity:0;
-    vertical-align:middle
-  }
-  .qrcode-text + .qrcode-text-btn {
-  width: 1.7em;
-  margin-left: -1.7em;
-  vertical-align: middle;
-}
+  .qrcode-text {padding-right:1.7em; margin-right:0}
+  .qrcode-text-btn {display:inline-block; background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat; height:1em; width:1.7em; margin-left:-1.7em; cursor:pointer}
+  .qrcode-text-btn > input[type=file] {position:absolute; overflow:hidden; width:1px; height:1px; opacity:0}
 }
 
 </style>
+</head>
+
 <body class="drawer drawer--right">
   <header>
     <div class="title" font-family="Arial" font-size=4>
@@ -176,7 +89,12 @@
           <label for="fee">請求額</label>:&nbsp;<input id="fee" type="text" size="10">&nbsp;円
         </li>
         <li class="user">
-          <label for="user">アドレス</label>:&nbsp;<input id="user" type="text" class=qrcode-text size="10"><label class=qrcode-text-btn><input type=file accept="image/*" capture=environment onchange="openQRCamera(this);" tabindex=-1></label>&nbsp;へ支払う
+          <label for="user">アドレス</label>:&nbsp;
+          <input id="user" type=text class=qrcode-text size="10">
+          <label class=qrcode-text-btn>
+            <input type=file accept="image/*" capture=environment onclick="return showQRIntro();" onchange="openQRCamera(this);" tabindex=-1>
+          </label>
+          &nbsp;へ支払う
         </li>
       </ul>
       <p><big>支払い枚数: <span id="bill"><b></b></span> PHR</big></p>
@@ -210,5 +128,81 @@
       また、Twitterとの連携が出来ているかもご確認ください。
     </p>
   </div>
+  <script>
+    $(function() {
+      $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
+      .done(function(data) {
+        if (data[0].id) {
+          result = data[0].price_jpy;
+          var n = 1;
+          rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
+          $('#rate').html("<b>"+rate+"</b>");
+        } else {
+          $('#rate').html('価格が取得できません。');
+        }
+      });
+      setInterval(function(){
+        $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
+        .done(function(data) {
+          if (data[0].id) {
+            result = data[0].price_jpy;
+            var n = 1;
+            rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
+            $('#rate').html("<b>"+rate+"</b>");
+          } else {
+            $('#rate').html('価格が取得できません。');
+          }
+        });
+      }, 10000);
+
+      $('#request').click(function() {
+        if($("#fee").val()==""){
+          alert("入力されていません");
+        } else if(!$("#fee").val().match(/^[0-9]+$/)) {
+          alert("数字のみ入力してください");
+        } else if($("#user").val()==""){
+          alert("入力されていません");
+        }
+
+        var fee = $("#fee").val();
+        var n = 3;
+        var user = $("#user").val();
+        var bill = fee / result;
+        $("#qrcode").html("");
+        var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
+        $('#bill').html("<b>"+charge+"</b>");
+        var message = "./withdraw phr " + charge + " " + user;
+        var url = "line://msg/text/?" + encodeURIComponent(message);
+        $("#url").html(url);
+        $("#qrcode").qrcode({width: 200, height: 200, text: url});
+        var target = document.getElementById("twitter");
+        target.href = url;
+        target.innerText = "LINEで支払う";
+      });
+      $(document).ready(function() {
+        $(".drawer").drawer();
+      });
+    });
+
+    function openQRCamera(node) {
+      var reader = new FileReader();
+      reader.onload = function() {
+        node.value = "";
+        qrcode.callback = function(res) {
+          if(res instanceof Error) {
+            alert("QRコードが見つかりません。カメラの撮影範囲内にQRコードが存在することをお確かめください。");
+          } else {
+            node.parentNode.previousElementSibling.value = res;
+          }
+        };
+        qrcode.decode(reader.result);
+      };
+      reader.readAsDataURL(node.files[0]);
+    }
+
+    function showQRIntro() {
+      return confirm("カメラを使ってQRコードの写真を取ってください。");
+    }
+  </script>
 </body>
 </html>
