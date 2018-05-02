@@ -10,13 +10,10 @@
 <script src="js/iscroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src='https://dmla.github.io/jsqrcode/src/qr_packed.js'></script>
 <style>
 input, label {
   vertical-align: middle;
-}
-#qrcode-text-btn label {
-  float: right;
-  left: 50px;
 }
 .link_button {
   background-color: #00d188;
@@ -29,17 +26,44 @@ input, label {
   border: 2px solid #00d188;
 }
 #powered {
+  vertical-align: bottom;
   font-size: 15px;
   color: #5ae628;
 }
-.qrcode-text {padding-right:1.7em; margin-right:0}
-.qrcode-text-btn {display:inline-block; background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat; height:1em; width:1.7em; margin-left:-1.7em; cursor:pointer}
-.qrcode-text-btn > input[type=file] {position:absolute; overflow:hidden; width:1px; height:1px; opacity:0}
+.qrcode-text-btn {
+  display: none;
+}
+.qrcode-text {
+  margin-left: -7px;
+}
 
 @media only screen and (max-device-width:750px) {
-  .qrcode-text {padding-right:1.7em; margin-right:0}
-  .qrcode-text-btn {display:inline-block; background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat; height:1em; width:1.7em; margin-left:-1.7em; cursor:pointer}
-  .qrcode-text-btn > input[type=file] {position:absolute; overflow:hidden; width:1px; height:1px; opacity:0}
+  .qrcode-text {
+    margin-left: -7px;
+    padding-right:1.7em;
+    margin-right:25px;
+  }
+  .qrcode-text-btn {
+    float: none;
+    margin-top: 7px;
+    position: absolute;
+    display:inline-block;
+    background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat;
+    height:1em;
+    width:1.7em;
+    margin-left: -3em;
+    cursor:pointer
+  }
+  .qrcode-text-btn > input[type=file] {
+    margin-left: -3em;
+    margin-top: 7px;
+    float:none;
+    position:absolute;
+    overflow:hidden;
+    width:1px;
+    height:1px;
+    opacity:0;
+  }
 }
 
 </style>
@@ -88,11 +112,7 @@ input, label {
           <label for="fee">Charge</label>:&nbsp;<input id="fee" type="text" size="10">&nbsp;USD
         </li>
         <li class="user">
-          <label for="user">To</label>:&nbsp;
-          <input id="user" type=text class=qrcode-text size="10">
-          <label class=qrcode-text-btn>
-            <input type=file accept="image/*" capture=environment onclick="return showQRIntro();" onchange="openQRCamera(this);" tabindex=-1>
-          </label>
+          <label for="user">To</label>:&nbsp; <input id="user" type=text class=qrcode-text><label class=qrcode-text-btn><input type=file accept="image/*" capture=environment onclick="return showQRIntro();" onchange="openQRCamera(this);" tabindex=-1></label>
         </li>
       </ul>
       <p><big>Charge in PHR: <span id="bill"><b></b></span> PHR</big></p>

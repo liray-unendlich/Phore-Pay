@@ -10,68 +10,53 @@
 <script src="js/iscroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src='https://dmla.github.io/jsqrcode/src/qr_packed.js'></script>
 </head>
 <style>
+input, label {
+  vertical-align: middle;
+}
 #powered {
+  vertical-align: bottom;
   font-size: 15px;
   color: #55ACEE;
 }
-</style>
-<script>
-  $(function() {
-    $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
-    .done(function(data) {
-      if (data[0].id) {
-        result = data[0].price_usd;
-        var n = 1;
-        rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-        $('#rate').html("<b>"+rate+"</b>");
-      } else {
-        $('#rate').html("Can't fetch phore/usd rate.");
-      }
-    });
-    setInterval(function(){
-      $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
-      .done(function(data) {
-        if (data[0].id) {
-          result = data[0].price_usd;
-          var n = 1;
-          rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-          $('#rate').html("<b>"+rate+"</b>");
-        } else {
-          $('#rate').html("Can't fetch phore/usd rate.");
-        }
-      });
-    }, 10000);
-    $('#request').click(function() {
-      if($("#fee").val()==""){
-        alert("No input");
-      } else if(!$("#fee").val().match(/^[0-9]+$/)) {
-        alert("Only numeral");
-      } else if($("#user").val()==""){
-        alert("No input");
-      }
+.qrcode-text-btn {
+  display: none;
+}
+.qrcode-text {
+  margin-left: -7px;
+}
 
-      var fee = $("#fee").val();
-      var n = 3;
-      var user = $("#user").val();
-      var bill = fee / result;
-      $("#qrcode").html("");
-      var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
-      $('#bill').html("<b>"+charge+"</b>");
-      var message = "@tipsensu tip phr " + charge + " " + user;
-      var url = "twitter://post?message=" + encodeURIComponent(message);
-      $("#url").html(url);
-      $("#qrcode").qrcode({width: 200, height: 200, text: url});
-      var target = document.getElementById("twitter");
-      target.href = url;
-      target.innerText = "Pay via Twitter";
-  });
-  $(document).ready(function() {
-    $(".drawer").drawer();
-  });
-});
-</script>
+@media only screen and (max-device-width:750px) {
+  .qrcode-text {
+    margin-left: -7px;
+    padding-right:1.7em;
+    margin-right:25px;
+  }
+  .qrcode-text-btn {
+    float: none;
+    margin-top: 7px;
+    position: absolute;
+    display:inline-block;
+    background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat;
+    height:1em;
+    width:1.7em;
+    margin-left: -3em;
+    cursor:pointer
+  }
+  .qrcode-text-btn > input[type=file] {
+    margin-left: -3em;
+    margin-top: 7px;
+    float:none;
+    position:absolute;
+    overflow:hidden;
+    width:1px;
+    height:1px;
+    opacity:0;
+  }
+}
+</style>
 <body class="drawer drawer--right">
   <header>
     <div class="title" font-family="Arial" font-size=4>
@@ -115,7 +100,7 @@
           <label for="fee">Charge</label>:&nbsp;<input id="fee" type="text" size="10">&nbsp;USD
         </li>
         <li class="user">
-          <label for="user">To</label>:&nbsp;<input id="user" type="text" size="10">&nbsp;
+          <label for="user">To</label>:&nbsp; <input id="user" type=text class=qrcode-text><label class=qrcode-text-btn><input type=file accept="image/*" capture=environment onclick="return showQRIntro();" onchange="openQRCamera(this);" tabindex=-1></label>
         </li>
       </ul>
       <p><big>Charge in Phore: <span id="bill"><b></b></span> PHR</big></p>
@@ -148,5 +133,79 @@
       Then check whether your Twitter account linked to Sensu.
     </p>
   </div>
+  <script>
+    $(function() {
+      $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
+      .done(function(data) {
+        if (data[0].id) {
+          result = data[0].price_usd;
+          var n = 1;
+          rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
+          $('#rate').html("<b>"+rate+"</b>");
+        } else {
+          $('#rate').html("Can't fetch phore/usd rate.");
+        }
+      });
+      setInterval(function(){
+        $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
+        .done(function(data) {
+          if (data[0].id) {
+            result = data[0].price_usd;
+            var n = 1;
+            rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
+            $('#rate').html("<b>"+rate+"</b>");
+          } else {
+            $('#rate').html("Can't fetch phore/usd rate.");
+          }
+        });
+      }, 10000);
+      $('#request').click(function() {
+        if($("#fee").val()==""){
+          alert("No input");
+        } else if(!$("#fee").val().match(/^[0-9]+$/)) {
+          alert("Only numeral");
+        } else if($("#user").val()==""){
+          alert("No input");
+        }
+
+        var fee = $("#fee").val();
+        var n = 3;
+        var user = $("#user").val();
+        var bill = fee / result;
+        $("#qrcode").html("");
+        var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
+        $('#bill').html("<b>"+charge+"</b>");
+        var message = "@tipsensu tip phr " + charge + " " + user;
+        var url = "twitter://post?message=" + encodeURIComponent(message);
+        $("#url").html(url);
+        $("#qrcode").qrcode({width: 200, height: 200, text: url});
+        var target = document.getElementById("twitter");
+        target.href = url;
+        target.innerText = "Pay via Twitter";
+    });
+    $(document).ready(function() {
+      $(".drawer").drawer();
+    });
+  });
+  function openQRCamera(node) {
+    var reader = new FileReader();
+    reader.onload = function() {
+      node.value = "";
+      qrcode.callback = function(res) {
+        if(res instanceof Error) {
+          alert("Can't find any QR code. Please check there is QR code near.");
+        } else {
+          node.parentNode.previousElementSibling.value = res;
+        }
+      };
+      qrcode.decode(reader.result);
+    };
+    reader.readAsDataURL(node.files[0]);
+  }
+
+  function showQRIntro() {
+    return confirm("Take a photo via your camera.");
+  }
+  </script>
 </body>
 </html>
