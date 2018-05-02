@@ -1,0 +1,123 @@
+.header{
+  position: relative;
+}
+.title h1 {
+  font-family: "Avenir", "Arial";
+  line-height: 1.4;
+  padding-bottom: 5px;
+  border-bottom: solid 3px #000000;
+}
+.settings {
+    position: relative;
+    font-size: 1.4em;
+    margin: 2em 0;
+    padding: 1em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+.settings .set-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 1em;
+    background: #FFF;
+    color: #95ccff;
+    font-weight: bold;
+}
+.settings p {
+    margin: 0;
+    padding: 0;
+}
+input[type=text] {
+  width:210px;
+  height:30px;
+  font-size:1.3em;
+  line-height:30px;
+  vertical-align: middle;
+  position: relative;
+}
+ul.setting li {
+  list-style: none;
+  margin-top: 10px;
+  margin-left: -40px;
+}
+label {
+  margin-right: 10px;
+  width: 100px;
+  float: left;
+}
+#request {
+  font-size: 1.4em;
+  font-weight: bold;
+  background-color: #00d188;
+  border: 2px solid #00d188;
+  color: #fff;
+  line-height: 50px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+#request:hover {
+  background-color: #fff;
+  border-color: #00d188;
+  color: #00d188;
+}
+.howpay {
+    position: relative;
+    margin: 2em 0;
+    padding: 1em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.howpay .how-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 19px;
+    background: #FFF;
+    color: #95ccff;
+    font-weight: bold;
+}
+.howpay p {
+    margin: 0;
+    padding: 0;
+}
+.link_button {
+  font-weight: bold;/*太字に*/
+  text-decoration: none;/*下線消す*/
+  background: #55ACEE;/*背景を水色に*/
+  color:white;/*文字を白に*/
+  padding:5px 10px;/*内側の余白*/
+  border-radius: 20px;/*角を丸くする*/
+  font-family: 'Avenir','Arial';/*フォントをいい感じに*/
+}
+.link_button:hover {
+  background: white;
+  color: #55ACEE;
+  background: #FFFFFF;
+  font-weight: bold;
+  border: 2px solid #55ACEE;
+}
+html {
+  font-size: 100%;
+  font-family: "Avenir", "Meiryo UI" ,'Osaka',"MS Pゴシック", sans-serif;
+
+  // 600px以降から、100pxごとに1px大きくなる
+  @media (min-width: 600px) {
+    font-size: calc(112.5% + 4 * (100vw - 600px) / 400)
+  }
+
+  // 1,000px以上は、22pxに
+  @media (min-width: 1000px) {
+    font-size: calc(137.5%)
+  }
+}
