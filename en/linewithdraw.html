@@ -64,53 +64,52 @@ input, label {
          <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Twitter<span class="drawer-caret"></span>
          </a>
          <ul class="drawer-dropdown-menu">
-           <li><a class="drawer-dropdown-menu-item" href="index.html">チップ型(初心者向け)</a></li>
-           <li><a class="drawer-dropdown-menu-item" href="twitterwithdraw.html">送金型(中級者向け)</a></li>
+           <li><a class="drawer-dropdown-menu-item" href="index.html">Off Chain</a></li>
+           <li><a class="drawer-dropdown-menu-item" href="twitterwithdraw.html">On Chain</a></li>
          </ul>
        </li>
        <li><a class="drawer-menu-item" href="linewithdraw.html">LINE</a></li>
-       <li><a class="drawer-menu-item" href="">DISCORD(工事中)</a></li>
-       <li><a class="drawer-menu-item" href="https://phore.io">Phore公式サイト</a></li>
-       <li><a class="drawer-menu-item" href="https://sensu.tip">Sensu公式サイト</a></li>
-       <li><a class="drawer-menu-item" href="en/index.html">English</a></li>
+       <li><a class="drawer-menu-item" href="">DISCORD(under construction)</a></li>
+       <li><a class="drawer-menu-item" href="https://phore.io">Phore Official</a></li>
+       <li><a class="drawer-menu-item" href="https://sensu.tip">Sensu Official</a></li>
+       <li><a class="drawer-menu-item" href="../index.html">日本語</a></li>
      </ul>
      <!-- ここまでドロップダウンの中身 -->
     </nav>
   </header>
   <div>
-    現在のPhoreの価格: <span id="rate"></span> 円
+    Current Phore rate: <span id="rate"></span> USD
   </div>
   <form>
     <div class="settings">
-      <span class="set-title">支払い設定</span>
+      <span class="set-title">Payment Configuration</span>
       <ul class="setting">
         <li class="fee" style="margin-top:-15px;">
-          <label for="fee">請求額</label>:&nbsp;<input id="fee" type="text" size="10">&nbsp;円
+          <label for="fee">Charge</label>:&nbsp;<input id="fee" type="text" size="10">&nbsp;USD
         </li>
         <li class="user">
-          <label for="user">アドレス</label>:&nbsp;
+          <label for="user">To</label>:&nbsp;
           <input id="user" type=text class=qrcode-text size="10">
           <label class=qrcode-text-btn>
             <input type=file accept="image/*" capture=environment onclick="return showQRIntro();" onchange="openQRCamera(this);" tabindex=-1>
           </label>
-          &nbsp;へ支払う
         </li>
       </ul>
-      <p><big>支払い枚数: <span id="bill"><b></b></span> PHR</big></p>
+      <p><big>Charge in PHR: <span id="bill"><b></b></span> PHR</big></p>
     </div>
   </form>
   <div>
-    <input id="request" type="button" value="リクエスト" style="WIDTH:200px; HEIGHT:50px">
+    <input id="request" type="button" value="Request" style="WIDTH:200px; HEIGHT:50px">
   </div>
   <div class="howpay">
-    <span class="how-title">支払い方法</span>
+    <span class="how-title">How To Pay</span>
     <p>
-      1. 支払い設定へ支払い額, アドレス(店舗のアドレス)を入力<br>
-      2. リクエストボタンをクリック<br>
-      3. 支払い者がページを開いている場合<br>
-      　 下に表示される"LINEで支払う"リンクをクリック<br>
-      　 そうでない場合QRを読み込みSensuを選択しコメント<br>
-      4. ツイッターのリプライ画面で支払いを確認<br>
+      1. Input amount of payment, Address(Phore Address).<br>
+      2. Click "Request" button<br>
+      3. If you are buyer<br>
+      　 Click "Pay via LINE" button to pay.<br>
+      　 If no, Read below QR code and send the message to SENSU LINE@.<br>
+      4. Check the payment in Reply in Twitter app.<br>
     </p>
   </div>
   <div>
@@ -119,12 +118,11 @@ input, label {
   <div id="qrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;margin-top:23px;"></div>
 
   <div class="howpay">
-    <span class="how-title">説明・注意</span>
+    <span class="how-title">Description</span>
     <p>
-      この送金システムは <a href="https://sensu.tips/?hl=ja">Sensu</a> の開発者によるチップシステムを利用しています。<br>
-      まずはSensu開発者の皆さま、このようなマルチプラットフォームでのチップシステムのご開発をありがとうございます。<br>
-      ご利用前に、必ず<a href="https://sensu.tips/terms?hl=ja">利用規約</a>に同意されていることをご確認ください。
-      また、<a href="https://sensu.tips/usage?hl=ja">LINEとの連携</a>が出来ているかもご確認ください。
+      This payment service uses <a href="https://sensu.tips/?hl=en">Sensu</a> . I'm glad to make this app for Sensu's developpers.<br>
+      Please check whether you agree with <a href="https://sensu.tips/terms?hl=en">Sensu's terms of service</a>.
+      Then check whether your Twitter account linked to Sensu.
     </p>
   </div>
   <script>
@@ -132,35 +130,35 @@ input, label {
       $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
       .done(function(data) {
         if (data[0].id) {
-          result = data[0].price_jpy;
+          result = data[0].price_usd;
           var n = 1;
           rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
           $('#rate').html("<b>"+rate+"</b>");
         } else {
-          $('#rate').html('価格が取得できません。');
+          $('#rate').html("Can't fetch PHR/USD rate");
         }
       });
       setInterval(function(){
         $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
         .done(function(data) {
           if (data[0].id) {
-            result = data[0].price_jpy;
+            result = data[0].price_usd;
             var n = 1;
             rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
             $('#rate').html("<b>"+rate+"</b>");
           } else {
-            $('#rate').html('価格が取得できません。');
+            $('#rate').html("Can't fetch PHR/USD rate");
           }
         });
       }, 10000);
 
       $('#request').click(function() {
         if($("#fee").val()==""){
-          alert("入力されていません");
+          alert("No input");
         } else if(!$("#fee").val().match(/^[0-9]+$/)) {
-          alert("数字のみ入力してください");
+          alert("Only numarate");
         } else if($("#user").val()==""){
-          alert("入力されていません");
+          alert("No input");
         }
 
         var fee = $("#fee").val();
@@ -176,7 +174,7 @@ input, label {
         $("#qrcode").qrcode({width: 200, height: 200, text: url});
         var target = document.getElementById("twitter");
         target.href = url;
-        target.innerText = "LINEで支払う";
+        target.innerText = "Pay via LINE";
       });
       $(document).ready(function() {
         $(".drawer").drawer();
@@ -189,7 +187,7 @@ input, label {
         node.value = "";
         qrcode.callback = function(res) {
           if(res instanceof Error) {
-            alert("QRコードが見つかりません。カメラの撮影範囲内にQRコードが存在することをお確かめください。");
+            alert("Can't find any QR code. Please check there is QR code near.");
           } else {
             node.parentNode.previousElementSibling.value = res;
           }
@@ -200,7 +198,7 @@ input, label {
     }
 
     function showQRIntro() {
-      return confirm("カメラを使ってQRコードの写真を取ってください。");
+      return confirm("Take a photo via your camera.");
     }
   </script>
 </body>
