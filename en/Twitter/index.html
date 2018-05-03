@@ -1,35 +1,44 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Phore Pay | Pay with LINE</title>
-<link rel="icon" href="/path/favicon.ico">
+<title>Phore Pay | Pay with Twitter</title>
+<meta name="author" content="Liray with Phore Blockchain">
+<meta name="description" content="Phore Pay serves intermadiate payment with Phore on Twitter for small shop and individuals.">
+<meta property="og:url" content="http://phorepay.xsrv.jp" />
+<meta property="og:title" content="Phore Pay" />
+<meta property="og:type" content="article">
+<meta property="og:description" content="Phore Pay serves high speed intermadiate payment with Phore on Twitter for small shop and individuals." />
+<meta property="og:image" content="http://phorepay.xsrv.jp/logo.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@PhoreJapan" />
+<meta property="og:site_name" content="Phore Pay" />
+<meta property="og:locale" content="en" />
+<link rel="apple-touch-icon" sizes="180x180" href="http://phorepay.xsrv.jp/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://phorepay.xsrv.jp/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://phorepay.xsrv.jp/favicon-16x16.png">
+<link rel="manifest" href="http://phorepay.xsrv.jp/site.webmanifest">
+<link rel="mask-icon" href="http://phorepay.xsrv.jp/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-TileImage" content="http://phorepay.xsrv.jp/mstile-144x144.png">
+<meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-<link rel="stylesheet" href="css/main.css">
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery.qrcode.min.js"></script>
-<script src="js/iscroll.min.js"></script>
+<link rel="stylesheet" href="../css/main.css">
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/jquery.qrcode.min.js"></script>
+<script src="../js/iscroll.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 <script src='https://dmla.github.io/jsqrcode/src/qr_packed.js'></script>
+</head>
 <style>
 input, label {
   vertical-align: middle;
 }
-.link_button {
-  background-color: #00d188;
-}
-.link_button:hover {
-  background: white;
-  color: #00d188;
-  background: #FFFFFF;
-  font-weight: bold;
-  border: 2px solid #00d188;
-}
 #powered {
   vertical-align: bottom;
   font-size: 15px;
-  color: #5ae628;
+  color: #55ACEE;
 }
 .qrcode-text-btn {
   display: none;
@@ -37,6 +46,7 @@ input, label {
 .qrcode-text {
   margin-left: -7px;
 }
+
 @media only screen and (max-device-width:750px) {
   .qrcode-text {
     margin-left: -7px;
@@ -66,14 +76,11 @@ input, label {
   }
 }
 
-
 </style>
-</head>
-
 <body class="drawer drawer--right">
   <header>
     <div class="title" font-family="Arial" font-size=4>
-      <img src="logo.png" width="40" height="46.4649" alt="Phore Pay" align="left" hspace="10"><h1 class="title">Phore Pay<span id ="powered"> by LINE</span></h1>
+      <img src="../logo.png" width="40" height="46.4649" alt="Phore Pay" align="left" hspace="10"><h1 class="title">Phore Pay <span id ="powered"> by Twitter (On Chain)</span></h1>
     </div>
   </header>
   <header role="banner">
@@ -84,20 +91,19 @@ input, label {
     <nav class="drawer-nav" role="navigation">
      <!-- ここからドロップダウンの中身 -->
      <ul class="drawer-menu">
-       <li><a class="drawer-menu-item" href="index.html">TOP</a></li>
+       <li><a class="drawer-menu-item" href="../../index.html">TOP</a></li>
        <li class="drawer-dropdown">
          <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Twitter<span class="drawer-caret"></span>
          </a>
          <ul class="drawer-dropdown-menu">
-           <li><a class="drawer-dropdown-menu-item" href="index.html">Off Chain</a></li>
-           <li><a class="drawer-dropdown-menu-item" href="twitterwithdraw.html">On Chain</a></li>
+           <li><a class="drawer-dropdown-menu-item" href="../index.html">Off chain(For newbie)</a></li>
+           <li><a class="drawer-dropdown-menu-item" href="index.html">On chain</a></li>
          </ul>
        </li>
-       <li><a class="drawer-menu-item" href="linewithdraw.html">LINE</a></li>
-       <li><a class="drawer-menu-item" href="">DISCORD(under construction)</a></li>
+       <li><a class="drawer-menu-item" href="../LINE/index.html">LINE</a></li>
        <li><a class="drawer-menu-item" href="https://phore.io">Phore Official</a></li>
        <li><a class="drawer-menu-item" href="https://sensu.tip">Sensu Official</a></li>
-       <li><a class="drawer-menu-item" href="../index.html">日本語</a></li>
+       <li><a class="drawer-menu-item" href="../../index.html">日本語</a></li>
      </ul>
      <!-- ここまでドロップダウンの中身 -->
     </nav>
@@ -116,7 +122,7 @@ input, label {
           <label for="user">To</label>:&nbsp; <input id="user" type=text class=qrcode-text><label class=qrcode-text-btn><input type=file accept="image/*" capture=environment onclick="return showQRIntro();" onchange="openQRCamera(this);" tabindex=-1></label>
         </li>
       </ul>
-      <p><big>Charge in PHR: <span id="bill"><b></b></span> PHR</big></p>
+      <p><big>Charge in Phore: <span id="bill"><b></b></span> PHR</big></p>
     </div>
   </form>
   <div>
@@ -125,11 +131,12 @@ input, label {
   <div class="howpay">
     <span class="how-title">How To Pay</span>
     <p>
-      1. Input amount of payment, Address(Phore Address).<br>
+      1. Input amount of payment, Address(Phore Address)).<br>
+      　 Or you can read Phore address as QR.<br>
       2. Click "Request" button<br>
       3. If you are buyer<br>
-      　 Click "Pay via LINE" button to pay.<br>
-      　 If no, Read below QR code and send the message to SENSU LINE@.<br>
+      　 Click "Pay via Twitter" button to pay.<br>
+      　 If no, Read below QR code and tweet.<br>
       4. Check the payment in Reply in Twitter app.<br>
     </p>
   </div>
@@ -156,7 +163,7 @@ input, label {
           rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
           $('#rate').html("<b>"+rate+"</b>");
         } else {
-          $('#rate').html("Can't fetch PHR/USD rate");
+          $('#rate').html("Can't fetch phore/usd rate.");
         }
       });
       setInterval(function(){
@@ -168,16 +175,15 @@ input, label {
             rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
             $('#rate').html("<b>"+rate+"</b>");
           } else {
-            $('#rate').html("Can't fetch PHR/USD rate");
+            $('#rate').html("Can't fetch phore/usd rate.");
           }
         });
       }, 10000);
-
       $('#request').click(function() {
         if($("#fee").val()==""){
           alert("No input");
         } else if(!$("#fee").val().match(/^[0-9]+$/)) {
-          alert("Only numarate");
+          alert("Only numeral");
         } else if($("#user").val()==""){
           alert("No input");
         }
@@ -189,38 +195,37 @@ input, label {
         $("#qrcode").html("");
         var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
         $('#bill').html("<b>"+charge+"</b>");
-        var message = "./withdraw phr " + charge + " " + user;
-        var url = "line://msg/text/?" + encodeURIComponent(message);
+        var message = "@tipsensu tip phr " + charge + " " + user;
+        var url = "twitter://post?message=" + encodeURIComponent(message);
         $("#url").html(url);
         $("#qrcode").qrcode({width: 200, height: 200, text: url});
         var target = document.getElementById("twitter");
         target.href = url;
-        target.innerText = "Pay via LINE";
-      });
-      $(document).ready(function() {
-        $(".drawer").drawer();
-      });
+        target.innerText = "Pay via Twitter";
     });
-
-    function openQRCamera(node) {
-      var reader = new FileReader();
-      reader.onload = function() {
-        node.value = "";
-        qrcode.callback = function(res) {
-          if(res instanceof Error) {
-            alert("Can't find any QR code. Please check there is QR code near.");
-          } else {
-            node.parentNode.previousElementSibling.value = res;
-          }
-        };
-        qrcode.decode(reader.result);
+    $(document).ready(function() {
+      $(".drawer").drawer();
+    });
+  });
+  function openQRCamera(node) {
+    var reader = new FileReader();
+    reader.onload = function() {
+      node.value = "";
+      qrcode.callback = function(res) {
+        if(res instanceof Error) {
+          alert("Can't find any QR code. Please check there is QR code near.");
+        } else {
+          node.parentNode.previousElementSibling.value = res;
+        }
       };
-      reader.readAsDataURL(node.files[0]);
-    }
+      qrcode.decode(reader.result);
+    };
+    reader.readAsDataURL(node.files[0]);
+  }
 
-    function showQRIntro() {
-      return confirm("Take a photo via your camera.");
-    }
+  function showQRIntro() {
+    return confirm("Take a photo via your camera.");
+  }
   </script>
 </body>
 </html>
