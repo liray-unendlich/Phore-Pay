@@ -5,22 +5,22 @@
 <title>Phore Pay | Pay with Twitter</title>
 <meta name="author" content="Liray with Phore Blockchain">
 <meta name="description" content="Phore PayはPhoreを決済に用いたい小規模なショップや個人に対してTwitter, LINEでの様々な支払い方法の支援を行います。">
-<meta property="og:url" content="http://phorepay.xsrv.jp/Twitter" />
+<meta property="og:url" content="https://phorepay.xsrv.jp/Twitter" />
 <meta property="og:title" content="Phore Pay with Twitter" />
 <meta property="og:type" content="article">
 <meta property="og:description" content="Phoreを支払いに使いたいショップ・個人に対してTwitterを用いた高速な決済支援を行います。" />
-<meta property="og:image" content="http://phorepay.xsrv.jp/logo.png" />
+<meta property="og:image" content="https://phorepay.xsrv.jp/logo.png" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@PhoreJapan" />
 <meta property="og:site_name" content="Phore Pay with Twitter" />
 <meta property="og:locale" content="ja_JP" />
-<link rel="apple-touch-icon" sizes="180x180" href="http://phorepay.xsrv.jp/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://phorepay.xsrv.jp/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="http://phorepay.xsrv.jp/favicon-16x16.png">
-<link rel="manifest" href="http://phorepay.xsrv.jp/site.webmanifest">
-<link rel="mask-icon" href="http://phorepay.xsrv.jp/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="apple-touch-icon" sizes="180x180" href="https://phorepay.xsrv.jp/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://phorepay.xsrv.jp/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://phorepay.xsrv.jp/favicon-16x16.png">
+<link rel="manifest" href="https://phorepay.xsrv.jp/site.webmanifest">
+<link rel="mask-icon" href="https://phorepay.xsrv.jp/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#2b5797">
-<meta name="msapplication-TileImage" content="http://phorepay.xsrv.jp/mstile-144x144.png">
+<meta name="msapplication-TileImage" content="https://phorepay.xsrv.jp/mstile-144x144.png">
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
 <link rel="stylesheet" href="../css/main.css">
@@ -47,7 +47,7 @@ input, label {
   margin-left: -7px;
 }
 
-@media only screen and (max-device-width:750px) {
+@media only screen and (max-device-width:780px) {
   .qrcode-text {
     margin-left: -7px;
     padding-right:1.7em;
@@ -75,12 +75,15 @@ input, label {
     opacity:0;
   }
 }
-
+#how-string {
+  padding: 0;
+  margin: 0px 0px 0px 20px;
+}
 </style>
 <body class="drawer drawer--right">
   <header>
     <div class="title" font-family="Arial" font-size=4>
-      <img src="../logo.png" width="40" height="46.4649" alt="Phore Pay" align="left" hspace="10"><h1 class="title">Phore Pay <span id ="powered"> by Twitter (オンチェーン)</span></h1>
+      <img src="../logo.png" width="40" height="46.4649" alt="Phore Pay" align="left" hspace="10"><h1 class="title">Phore Pay<span id ="powered"> by Twitter</span></h1>
     </div>
   </header>
   <header role="banner">
@@ -96,8 +99,8 @@ input, label {
          <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Twitter<span class="drawer-caret"></span>
          </a>
          <ul class="drawer-dropdown-menu">
-           <li><a class="drawer-dropdown-menu-item" href="../index.html">チップ型(初心者向け)</a></li>
-           <li><a class="drawer-dropdown-menu-item" href="index.html">送金型(中級者向け)</a></li>
+           <li><a class="drawer-dropdown-menu-item" href="../index.html">アカウント送金</a></li>
+           <li><a class="drawer-dropdown-menu-item" href="index.html">アドレス送金</a></li>
          </ul>
        </li>
        <li><a class="drawer-menu-item" href="../LINE/index.html">LINE</a></li>
@@ -130,15 +133,13 @@ input, label {
   </div>
   <div class="howpay">
     <span class="how-title">支払い方法</span>
-    <p>
-      1. 支払い設定へ支払い額, アドレス(店舗のアドレス)を入力<br>
-      　 もしくはQRでアドレスを読み取る<br>
-      2. リクエストボタンをクリック<br>
-      3. 支払い者がページを開いている場合<br>
-      　 下に表示される"Twitterで支払う"リンクをクリック<br>
-      　 そうでない場合QRを読み込みツイート<br>
-      4. Twitterのリプライ画面で支払いを確認<br>
-    </p>
+    <ol id="how-string" start="0">
+      <li>LINE/Twitterのどちらで支払うか選択し、右上メニューより移動</li>
+      <li>支払い額, Phoreアドレスを入力(QR読み取り)</li>
+      <li>リクエストボタンをクリック</li>
+      <li>支払い者がページを開いている場合<br>下の"Twitterで支払う"をクリック<br>そうでない場合QRを読み込みツイート<br></li>
+      <li>Twitterのリプライ画面で支払いを確認</li>
+    </ol>
   </div>
   <div>
     <a class="link_button" id="twitter"></a>
