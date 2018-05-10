@@ -1,12 +1,32 @@
-
-.header{
-  position: relative;
+a {
+  font-weight: bold;
+  text-decoration: none;
 }
-.title h1 {
-  font-family: "Avenir", "Arial";
-  line-height: 1.4;
-  padding-bottom: 5px;
-  border-bottom: solid 3px #000000;
+a:link {
+  color: #95ccff;
+}
+a:visited {
+  color: #95ccff;
+}
+a.drawer-menu-item {
+  border-bottom: dashed 1px silver;
+  color:white;
+}
+.drawer-menu-item:hover {
+  color : #95ccff;
+}
+a.drawer-dropdown-menu-item {
+  color: white;
+}
+a.drawer-dropdown-menu-item:hover {
+  color: #95ccff;
+}
+a#twitter.link_button {
+  color : white;
+  background-color: #55ACEE;
+}
+div#qrcode {
+  padding: 5px;
 }
 .drawer-hamburger-icon {
   background: #00d188;
@@ -20,44 +40,63 @@
   background-color: #00d188;
   height: 3px;
 }
+ul.drawer-dropdown-menu {
+  background-color: #001366;
+}
 ul.drawer-menu li {
   border-bottom: dashed 1px silver;
 }
 ul.drawer-dropdown-menu li {
   border-bottom: dashed 1px silver;
 }
-a.drawer-menu-item {
-  border-bottom: dashed 1px silver;
+ul.setting li {
+  list-style: none;
+  margin-top: 10px;
+  margin-left: -40px;
 }
-.settings {
+nav.drawer-nav {
+  color: white;
+  background-color: #001366;
+}
+.header{
+  position: relative;
+}
+.howpay, .settings {
     position: relative;
-    font-size: 1.4em;
     margin: 2em 0;
     padding: 1em 1em;
     border: solid 3px #95ccff;
     border-radius: 8px;
     font-weight: bold;
-    margin-top: 30px;
 }
-.settings .set-title {
-    position: absolute;
-    display: inline-block;
-    top: -13px;
-    left: 10px;
-    padding: 0 9px;
-    line-height: 1;
-    font-size: 1em;
-    background: #FFF;
-    color: #95ccff;
-    font-weight: bold;
+.howpay {
+  margin-bottom: 20px;
 }
-.settings p {
+.howpay .how-title, .settings .set-title {
+  background-color: #001428;
+  position: absolute;
+  display: inline-block;
+  top: -13px;
+  left: 10px;
+  padding: 0 9px;
+  line-height: 1;
+  font-size: 19px;
+  color: #95ccff;
+  font-weight: bold;
+}
+.howpay p, .settings p {
     margin: 0;
     padding: 0;
 }
 #how-string {
   padding: 0;
   margin: 0px 0px 0px 20px;
+}
+html {
+  color: white;
+  background-color: #001428;
+  font-size: 100%;
+  font-family: "Avenir", "Meiryo UI" ,'Osaka',"MS Pゴシック", sans-serif;
 }
 input#fee {
   width:210px;
@@ -75,15 +114,31 @@ input#user {
   vertical-align: middle;
   position: relative;
 }
-ul.setting li {
-  list-style: none;
-  margin-top: 10px;
-  margin-left: -40px;
-}
 label {
   margin-right: 10px;
   width: 100px;
   float: left;
+}
+.link_button {
+  font-weight: bold;
+  text-decoration: none;
+  background: #55ACEE;
+  color:white;
+  padding:5px 10px;
+  border-radius: 20px;
+  font-family: 'Avenir','Arial';
+}
+.link_button:hover {
+  background: white;
+  color: #55ACEE;
+  background: #FFFFFF;
+  font-weight: bold;
+  border: 2px solid #55ACEE;
+}
+#powered {
+  vertical-align: bottom;
+  font-size: 15px;
+  color: #55ACEE;
 }
 #request {
   font-size: 1.4em;
@@ -100,77 +155,19 @@ label {
   border-color: #00d188;
   color: #00d188;
 }
-.howpay {
-    position: relative;
-    margin: 2em 0;
-    padding: 1em 1em;
-    border: solid 3px #95ccff;
-    border-radius: 8px;
-    font-weight: bold;
-    margin-bottom: 20px;
+.settings {
+    font-size: 1.4em;
+    margin-top: 30px;
 }
-.howpay .how-title {
-    position: absolute;
-    display: inline-block;
-    top: -13px;
-    left: 10px;
-    padding: 0 9px;
-    line-height: 1;
-    font-size: 19px;
-    background: #FFF;
-    color: #95ccff;
-    font-weight: bold;
+.title h1 {
+  border-bottom: 2px dashed #ffffff;
+  font-family: "Avenir", "Arial";
+  line-height: 1.4;
+  padding-bottom: 5px;
 }
-#how-string {
-  padding: 0;
-  margin: 0px 0px 0px 20px;
+@media (min-width: 600px) {
+  font-size: calc(112.5% + 4 * (100vw - 600px) / 400)
 }
-.howpay p {
-    margin: 0;
-    padding: 0;
-}
-.link_button {
-  font-weight: bold;/*太字に*/
-  text-decoration: none;/*下線消す*/
-  background: #55ACEE;/*背景を水色に*/
-  color:white;/*文字を白に*/
-  padding:5px 10px;/*内側の余白*/
-  border-radius: 20px;/*角を丸くする*/
-  font-family: 'Avenir','Arial';/*フォントをいい感じに*/
-}
-.link_button:hover {
-  background: white;
-  color: #55ACEE;
-  background: #FFFFFF;
-  font-weight: bold;
-  border: 2px solid #55ACEE;
-}
-.drawer-hamburger-icon {
-  background: #00d188;
-  padding: 0.5px;
-}
-.drawer-hamburger-icon:before {
-  background-color: #00d188;
-  height: 3px;
-}
-.drawer-hamburger-icon:after {
-  background-color: #00d188;
-  height: 3px;
-}
-ul.drawer-menu li {
-  border-bottom: dashed 1px silver;
-}
-html {
-  font-size: 100%;
-  font-family: "Avenir", "Meiryo UI" ,'Osaka',"MS Pゴシック", sans-serif;
-
-  // 600px以降から、100pxごとに1px大きくなる
-  @media (min-width: 600px) {
-    font-size: calc(112.5% + 4 * (100vw - 600px) / 400)
-  }
-
-  // 1,000px以上は、22pxに
-  @media (min-width: 1000px) {
-    font-size: calc(137.5%)
-  }
+@media (min-width: 1000px) {
+  font-size: calc(137.5%)
 }

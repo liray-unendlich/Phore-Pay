@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Phore Pay Seller Guide</title>
+<meta name="author" content="Liray with Phore Blockchain">
+<meta name="description" content="Phore PayはPhoreを決済に用いたい小規模なショップや個人に対してLINE, Twitterでの様々な支払い方法の支援を行います。">
+<meta property="og:url" content="https://phorepay.xsrv.jp/LINE" />
+<meta property="og:title" content="Phore Pay Guide For Seller" />
+<meta property="og:type" content="article">
+<meta property="og:description" content="Phoreを支払いに使いたいショップ・個人に対してLINEを用いた高速な決済支援を行います。" />
+<meta property="og:image" content="https://phorepay.xsrv.jp/logo.png" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@PhoreJapan" />
+<meta property="og:site_name" content="Phore Pay Guide For Seller" />
+<meta property="og:locale" content="ja_JP" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://phorepay.xsrv.jp/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://phorepay.xsrv.jp/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://phorepay.xsrv.jp/favicon-16x16.png">
+<link rel="manifest" href="https://phorepay.xsrv.jp/site.webmanifest">
+<link rel="mask-icon" href="https://phorepay.xsrv.jp/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#2b5797">
+<meta name="msapplication-TileImage" content="https://phorepay.xsrv.jp/mstile-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
+<link rel="stylesheet" href="../../css/main.css">
+</head>
+<style>
+h2 {
+  border-bottom: 1px solid;
+}
+.contents {
+    position: relative;
+    margin: 2em 0;
+    padding: 1em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.contents .con-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 19px;
+    background: #001428;
+    color: #95ccff;
+    font-weight: bold;
+}
+#table {
+  padding: 0;
+  margin: 0px 0px 0px 20px;
+}
+li {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+ol#test b {
+  margin-left: -10px;
+}
+ol#test {
+  margin-left: -15px;
+}
+img {
+  max-width: 500px;
+  height: auto;
+}
+html {
+  margin-right: 0px;
+}
+.commands {
+  padding : 3px 0px 3px 10px;;
+  margin: 3px;
+  margin-right: -20px;
+  border: dashed 2px #95ccff;
+  width: 200px;
+  font-weight: bold;
+}
+@media screen and (max-width: 800px) {
+  img {
+    max-width: 90%;
+    height: auto;
+  }
+}
+</style>
+<body class="drawer drawer--right">
+  <header>
+    <div class="title" font-family="Arial" font-size=4>
+      <img src="../../logo.png" width="40" height="46.4649" alt="Phore Pay" align="left" hspace="10"><h1 class="title">Phore Pay</h1>
+    </div>
+  </header>
+  <header role="banner">
+    <button type="button" class="drawer-toggle drawer-hamburger">
+      <span class="sr-only">toggle navigation</span>
+      <span class="drawer-hamburger-icon"></span>
+    </button>
+    <nav class="drawer-nav" role="navigation">
+     <!-- ここからドロップダウンの中身 -->
+     <ul class="drawer-menu">
+       <li><a class="drawer-menu-item" href="../../index.html">TOP</a></li>
+       <li class="drawer-dropdown">
+         <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Twitter<span class="drawer-caret"></span>
+         </a>
+         <ul class="drawer-dropdown-menu">
+           <li><a class="drawer-dropdown-menu-item" href="../../index.html">アカウント送金</a></li>
+           <li><a class="drawer-dropdown-menu-item" href="../../Twitter/index.html">アドレス送金</a></li>
+         </ul>
+       </li>
+       <li><a class="drawer-menu-item" href="../../LINE/index.html">LINE</a></li>
+       <li class="drawer-dropdown">
+         <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">利用ガイド<span class="drawer-caret"></span>
+         </a>
+         <ul class="drawer-dropdown-menu">
+           <li><a class="drawer-dropdown-menu-item" href="../Buyer/index.html">購入者ユーザー</a></li>
+           <li><a class="drawer-dropdown-menu-item" href="index.html">販売者ユーザー</a></li>
+         </ul>
+       </li>
+       <li><a class="drawer-menu-item" href="https://phore.io">Phore公式サイト</a></li>
+       <li><a class="drawer-menu-item" href="https://sensu.tips">Sensu公式サイト</a></li>
+       <li><a class="drawer-menu-item" href="../../en/index.html">English</a></li>
+     </ul>
+     <!-- ここまでドロップダウンの中身 -->
+    </nav>
+  </header>
+  <div><h1 id="buyerguide">販売者用ガイド</h1></div>
+  <h2 id="chap0">0. Phore Payとは？</h2>
+  <p>
+    Phore PayとはSensuを用いたTwitter/LINEでの支払い支援サービスです。
+  </p>
+  <ol id="test">
+    <b>必要なもの</b>
+    <li>ネットワークに接続されているタブレット or スマートフォン(大画面が望ましい)</li>
+    <li>店舗としてTwitterアカウントを持っていること</li>
+    <li>PhoreアドレスをQRコードとして印刷されていること</li>
+  </ol>
+  のいずれかが満たされていれば送金が可能です。
+
+  <div class="contents">
+    <span class="con-title">目次</span>
+    <ol id="table">
+      <li><a href="#chap1">Twitterアカウントに送金してもらう</a></li>
+      <li><a href="#chap2">アドレスに直接送金してもらう</a></li>
+      <li><a href="#chap3">PhoreアドレスをQRコードで印刷している場合</a></li>
+      <li><a href="#chap4">Phoreアドレスの取得の仕方、QRコードの出し方</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol>
+  </div>
+
+  <h2 id="chap1">1. Twitterアカウントに送金してもらう</h2>
+  <h3 id="sec1"> a. ウェブサイトから<a href="https://sensu.tips">Sensu</a>へ登録</h3>
+  <a href="https://sensu.tips/terms?hl=ja">Sensu利用規約</a>をお読みの上、同意できる方は
+  <a href="https://sensu.tips/account/new?hl=ja">こちら</a>よりアカウントを作成しましょう。入力が完了したら、作成ボタンをクリックしましょう。作成が完了したら、次の画像のようにログインが完了するはずです。<br>
+  <img src="../Buyer/img/1.png"><br>
+  出来ていなければ、画面上部にあるメニューよりログインを選択してください。
+  <h3 id="sec2"> b. Twitter/LINEと<a href="https://sensu.tips">Sensu</a>で連携</h3>
+  ログインが完了したら、画面上部のメニューより<a href="https://sensu.tips/account?hl=ja">IDになっている部分</a>をクリックしましょう。
+  すると、上のような画面になるはずです。
+  ここから、連携タブをクリックし、認証コードボタンをクリックしましょう。<br>
+  <img src="../Buyer/img/2.png"><br>
+  の認証コードをコピーしましょう。<br><br>
+  <b>Twitterの場合</b><br>
+  <a href="https://twitter.com/tipsensu">@tipsensu</a>より、Twitter上で<a href="https://twitter.com/tipsensu">@tipsensu</a>へダイレクトメールを次のような文面で送信しましょう。
+  <div class="commands">
+    link 認証コード<br>
+  </div>
+  送信後、次のような返事が返ってきます。<br>
+  <img src="../Buyer/img/3.png"><br>
+  Twitterとの連携が出来ました。次にLINEとの連携を行いましょう。<br><br>
+  <b>LINEの場合</b><br>
+  <a href="https://line.me/R/ti/p/LT9i64cCqM">このリンクよりSensuのLINE@</a>を友達登録しましょう。
+  友達登録が完了したら、同じ手順で認証コードを発行し、次の文面を送信してください。<br>
+  <div class="commands">
+    ./link 認証コード<br>
+  </div>
+  送信後、次のような返事が返ってきます。<br>
+  <img src="../Buyer/img/4.png"><br>
+  LINEとも連携が完了しました。
+  Discordは、LINEと同じ方法で認証が出来ます。
+  <a href="https://discord.gg/tsTUwhs">こちら</a>よりPhore日本のDiscordにご加入いただき、
+  Sensuを探してください。Sensuを見つけたら、直接メッセージで<br>
+  <div class="commands">
+    ./link 認証コード<br>
+  </div>
+  を送信することで認証が可能です。
+  <h3 id="sec3"> c. 残高を確認してみよう</h3>
+  認証が完了したら、実際に残高を確認してみましょう。<br>
+  <div class="commands">
+    Twitterでは<br>
+    @tipsensu balance phr<br>
+    LINEでは<br>
+    ./balance phr<br>
+  </div>
+  と送信することで、Phoreの残高を確認できます。
+  <br>
+  <a href="#buyerguide">一番上へ</a>
+
+  <h3>d. Twitterアカウント名へ支払</h2>
+  右上の緑色の三本線メニューを開き、Twitter > アカウント送金へ移動しましょう。請求額(日本円), 支払い先(連携したTwitterのアカウント名を@から)を入力しましょう(図例)。<br>
+  <img src="../Buyer/img/5.png"><br>
+  リクエストボタンをクリックすると青いTwitterで支払うボタンとQRコードが出力されます。
+  <ol style="list-style:upper-latin">
+    <li>利用者がページを開いている場合</li>
+    "Twitterで支払う"ボタンを押しツイートしていただきましょう
+    <li>店舗がページを開いている場合</li>
+    提示されるQRを読み込みツイートしていただきましょう
+  </ol>
+  ツイートが完了すると、次のような返信が届きます。<br>
+  <img src="../Buyer/img/6.png"><br>
+  これを支払い者の画面で確認できれば、支払いは完了です。残高をTwitter/LINE上で確認してみましょう。
+  <br>
+  <a href="#buyerguide">一番上へ</a>
+
+  <h2 id="chap2">アドレスに直接送金してもらう</h2>
+  <h3 id="chap2">Phoreアドレスを取得する</h3>
+  <h4>Sensuから取得する</h4>
+  上よりSensuへ登録し次のコマンドを入力し、アドレス(Pから始まる)を取得する。アドレスを取得したら、予測変換に入れる/<a href="https://qr.quel.jp/form_bsc_msg.php">こちら</a>でQRコードにし、印刷などをしすぐ入力できるようにしましょう。
+  <div class="commands">
+    Twitter:
+    deposit phr<br>
+    LINE:
+    ./deposit phr
+  </div>
+  <h4>Androidウォレットをインストールする</h4>
+  <a href="https://play.google.com/store/apps/details?id=io.phore.android">こちら</a>よりインストールできます。上と同じく、アドレスをウォレット内で取得し、予測変換などに入れるか/印刷しましょう。
+  <h4>(PCがあれば)デスクトップウォレットを使う</h4>
+  現在工事中
+  <h3>支払ってもらう</h3>
+  支払い者がTwitterで支払うか、LINEで支払うかに合わせ、右上の緑色の三本線メニューを開き、Twitter > アドレス送金(LINE)へ移動しましょう。
+  支払い設定の枠内の、請求額(日本円), 支払い先(Pから始まるPhoreアドレス)を入力しましょう(図例)。<br>
+  <img src="../Buyer/img/7.png"><br>
+  リクエストボタンをクリックすると、青いTwitterで支払う(LINEで支払う)ボタンとQRコードが出力されます。
+  <ol style="list-style:upper-latin">
+    <li>利用者がページを開いている場合</li>
+    "Twitterで支払う"(LINEで支払う)ボタンを押しツイート/メッセージ送信
+    <li>店舗がページを開いている場合</li>
+    提示されるQRを読み込みツイート/メッセージ送信
+  </ol>
+  ツイートが完了すると、次のような返信が届きます。<br>
+  <img src="../Buyer/img/6.png"><br>
+  LINEの場合、<br>
+  <img src="../Buyer/img/9.png"><br>
+  Sensuからリプライや返答が返ってきていれば、送金は完了しています。
+  これを確認後、残高をご確認ください(反映まで長くて5分ほどかかります)。
+  <br>
+  <a href="#buyerguide">一番上へ</a>
+
+  <h2 id="faq">FAQ</h2>
+  Q. Sensuから返事が返ってこない<br>
+  A. よりSensuが停止中か、稼働中かご確認ください。<br>
+  <br>
+  Q. 返事が来ていない場合、支払いはされているか？<br>
+  A. されておりません。そのような場合、大変お手数ですが他の支払い方法で支払っていただいてください。<br>
+  <a href="#buyerguide">一番上へ</a><br>
+  <a class="twitter-timeline" data-lang="ja" data-width="400" data-height="400" href="https://twitter.com/tipsensu?ref_src=twsrc%5Etfw">Tweets by tipsensu</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <script>
+    $(function() {
+      $(document).ready(function() {
+        $(".drawer").drawer();
+      });
+    });
+  </script>
+</body>
