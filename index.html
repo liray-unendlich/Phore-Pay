@@ -1,41 +1,136 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Phore Pay</title>
-<meta name="author" content="Liray with Phore Blockchain">
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes">
+<title>Phore Pay - Pay with Phore</title>
+<meta name="author" content="liray with Phore Blockchain">
 <meta name="description" content="Phore PayはPhoreを決済に用いたい小規模なショップや個人に対してTwitter, LINEでの様々な支払い方法の支援を行います。">
-<meta property="og:url" content="https://phorepay.xsrv.jp" />
-<meta property="og:title" content="Phore Pay" />
+<meta property="og:url" content="https://pay.phore.jp">
+<meta property="og:title" content="Phore Pay - Pay with Phore">
 <meta property="og:type" content="website">
 <meta property="og:description" content="Phoreを支払いに使いたいショップ・個人に対してTwitter, LINEを用いた高速な決済支援を行います。" />
-<meta property="og:image" content="https://phorepay.xsrv.jp/logo.png" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@PhoreJapan" />
-<meta property="og:site_name" content="Phore Pay" />
-<meta property="og:locale" content="ja_JP" />
-<link rel="apple-touch-icon" sizes="180x180" href="https://phorepay.xsrv.jp/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://phorepay.xsrv.jp/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://phorepay.xsrv.jp/favicon-16x16.png">
-<link rel="manifest" href="https://phorepay.xsrv.jp/site.webmanifest">
-<link rel="mask-icon" href="https://phorepay.xsrv.jp/safari-pinned-tab.svg" color="#5bbad5">
+<meta property="og:image" content="https://pay.phore.jp/logo.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@PhoreJapan">
+<meta property="og:site_name" content="Phore Pay - Pay with Phore">
+<meta property="og:locale" content="ja_JP">
+<link rel="apple-touch-icon" sizes="180x180" href="https://pay.phore.jp/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://pay.phore.jp/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://pay.phore.jp/favicon-16x16.png">
+<link rel="manifest" href="https://pay.phore.jp/site.webmanifest">
+<link rel="mask-icon" href="https://pay.phore.jp/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#2b5797">
-<meta name="msapplication-TileImage" content="https://phorepay.xsrv.jp/mstile-144x144.png">
+<meta name="msapplication-TileImage" content="https://pay.phore.jp/mstile-144x144.png">
 <meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/min-style.css">
 </head>
 <style>
+div.twrequest {
+  margin-top: -20px;
+}
+div.linerequest {
+  margin-bottom: -10px;
+}
 #powered {
   vertical-align: bottom;
   font-size: 15px;
-  color: #55ACEE;
+  color: white;
+}
+.qrcode-text-btn {
+  display: none;
+  float: none;
+  margin-top: 8px;
+  position: absolute;
+  background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat;
+  height:1em;
+  width:1.7em;
+  margin-left: -2em;
+  cursor:pointer;
+}
+.qrcode-text {
+  padding-right:1.7em;
+  margin-right:0px;
+  margin-left: -7px;
+}
+.qrcode-text-btn > input[type=file] {
+  margin-left: -3em;
+  margin-top: 8px;
+  float:none;
+  position:absolute;
+  overflow:hidden;
+  width:1px;
+  height:1px;
+  opacity:0;
+}
+@media only screen and (max-device-width: 420px) {
+  input#fee, input#user {
+    width: 40%;
+  }
+  input#address {
+    width: calc( 0.40 * ( 100% - 2.84em ) );
+  }
+  .qrcode-text-btn {
+    display:inline-block;
+  }
+  ul.setting li {
+    float: left;
+  }
+}
+@media only screen and (max-device-width:780px) {
+  input#address {
+    width: calc( 0.40 * ( 100% - 2.8em ) );
+  }
+  input#fee, input#user {
+    width: 40%;
+  }
+  .qrcode-text-btn {
+    display:inline-block;
+  }
+}
+@media only screen and (max-device-width:1024px) {
+  input#address {
+    width: calc( 0.50 * ( 100% - 2.8em ) );
+  }
+  input#fee, input#user {
+    width: 50%;
+  }
+  .qrcode-text {
+    margin-left: -7px;
+    padding-right:1.7em;
+    margin-right:0px;
+  }
+  .qrcode-text-btn {
+    float: none;
+    margin-top: 8px;
+    position: absolute;
+    display:inline-block;
+    background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat;
+    height:1em;
+    width:1.7em;
+    margin-left: -2em;
+    cursor:pointer
+  }
+  .qrcode-text-btn > input[type=file] {
+    margin-left: -3em;
+    margin-top: 8px;
+    float:none;
+    position:absolute;
+    overflow:hidden;
+    width:1px;
+    height:1px;
+    opacity:0;
+  }
+}
+}
+#how-string {
+  padding: 0;
+  margin: 0px 0px 0px 20px;
 }
 </style>
 <body class="drawer drawer--right">
   <header>
     <div class="title" font-family="Arial" font-size=4>
-      <img src="logo.png" width="40" height="46.4649" alt="Phore Pay" align="left" hspace="10"><h1 class="title">Phore Pay<span id ="powered"> by Twitter</span></h1>
+      <img src="logo.png" width="40" height="46.4649" alt="Phore Pay" align="left" hspace="10"><h1 class="title">Phore Pay<span id ="powered"> by Sensu</span></h1>
     </div>
   </header>
   <header role="banner">
@@ -47,15 +142,6 @@
      <!-- ここからドロップダウンの中身 -->
      <ul class="drawer-menu">
        <li><a class="drawer-menu-item" href="index.html">TOP</a></li>
-       <li class="drawer-dropdown">
-         <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Twitter<span class="drawer-caret"></span>
-         </a>
-         <ul class="drawer-dropdown-menu">
-           <li><a class="drawer-dropdown-menu-item" href="index.html">アカウント送金</a></li>
-           <li><a class="drawer-dropdown-menu-item" href="Twitter/index.html">アドレス送金</a></li>
-         </ul>
-       </li>
-       <li><a class="drawer-menu-item" href="LINE/index.html">LINE</a></li>
        <li class="drawer-dropdown">
          <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">利用ガイド<span class="drawer-caret"></span>
          </a>
@@ -74,40 +160,56 @@
   <div>
     現在のPhoreの価格: <span id="rate"></span> 円
   </div>
-  <form>
+  <form data-persist="garlic">
     <div class="settings">
       <span class="set-title">支払い設定</span>
       <ul class="setting">
         <li class="fee" style="margin-top:-15px;">
-          <label for="fee">請求額</label>:&nbsp;<input id="fee" type="text" size="10">&nbsp;円
+          <label for="fee">請求額￥</label>:&nbsp;<input id="fee" type="text" name="fee">
         </li>
         <li class="user">
-          <label for="user">支払い先</label>:&nbsp;<input id="user" type="text" size="10">&nbsp;へ支払
+          <label for="user">アカウント</label>:&nbsp;<input id="user" type="text" name="username">
+        </li>
+        <li class="address">
+          <label for="address">アドレス</label>:&nbsp; <input id="address" type="text" name="address" class="qrcode-text"><label class="qrcode-text-btn"><input type=file accept="image/*" capture=environment onclick="return showQRIntro();" onchange="openQRCamera(this);" tabindex=-1></label>
         </li>
       </ul>
+      <input id="reset" type="reset" value="リセット">
       <p><big>支払い枚数: <span id="bill"><b></b></span> PHR</big></p>
     </div>
   </form>
-  <div>
-    <input id="request" type="button" value="リクエスト" style="WIDTH:200px; HEIGHT:50px">
+  <div class="twrequest">
+    <input id="twrequest" type="button" value="Twitterで支払う" style="WIDTH:200px; HEIGHT:50px">
+  </div>
+  <div class="addrequest">
+    <input id="addrequest" type="button" value="Twitterで送金" style="WIDTH:200px; HEIGHT:50px">
+  </div>
+  <div class="linerequest">
+    <input id="linerequest" type="button" value="LINEで送金" style="WIDTH:200px; HEIGHT:50px">
   </div>
   <div class="howpay">
     <span class="how-title">支払い方法</span>
     <ol id="how-string" start="0">
       <li>初めての方は、右上メニューよりガイドをご覧ください</li>
-      <li>LINE/Twitterのどちらで支払うか選択し、右上メニューより移動</li>
-      <li>支払い額, 支払い先(@から始まるアカウント名)を入力</li>
-      <li>リクエストボタンをクリック</li>
-      <li>支払い者がページを開いている場合<br>下の"Twitterで支払う"をクリック<br>そうでない場合QRを読み込みツイート<br></li>
-      <li>Twitterのリプライ画面で支払いを確認</li>
-      <li>もしうまくいかなかったら？<a href="#timeline">こちらからSensuの状態を確認</a></li>
+      <li>支払い額(JPY), 支払い先(@から始まるTwitterアカウント名)を入力(Twitterで送金/LINEで送金する場合はアドレスを入力もしくはQRで読み取り)</li>
+      <li>支払い方法に合ったボタンをクリック(説明は下にあります)</li>
+      <li>支払い者がページを開いている場合<br>下の"~で支払う"をクリック<br>そうでない場合QRを読み込み送信<br></li>
+      <li>Twitterのリプライ画面/SensuのLINE@で支払いを確認</li>
+      <li>もしうまくいかなかったら？<a href="#timeline">Sensuの状態を確認</a></li>
     </ol>
   </div>
   <div>
-    <a class="link_button" id="twitter"></a>
+    <a class="link_button" id="twitter" style="display:none; background-color: #55acee;"></a>
   </div>
-  <div id="qrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;margin-top:23px;"></div>
-
+  <div>
+    <a class="link_button" id="addtwitter" style="display:none; background-color:#55acee;"></a>
+  </div>
+  <div>
+    <a class="link_button" id="line" style="display:none; background-color:#5ae628;"></a>
+  </div>
+  <div id="qrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;margin-top:23px;display: none;"></div>
+  <div id="addqrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;margin-top:23px;display: none;"></div>
+  <div id="lineqrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;margin-top:23px;display: none;"></div>
   <div class="howpay">
     <span class="how-title">説明・注意</span>
     <p>
@@ -115,79 +217,18 @@
       ご利用前に、必ず<a href="https://sensu.tips/terms?hl=ja">利用規約</a>に同意されていることをご確認ください。
       また、<a href="https://sensu.tips/usage?hl=ja">Twitterとの連携</a>が出来ているかもご確認ください。<br>
     </p>
+    <h4>各種支払い方法についての説明</h4>
+    <ul id="sysdis" >
+      <li>Twitterで支払う: Twitterアカウント名に支払う方法。請求額、Twitterアカウント名を入力しTwitterで支払うボタンを押してください。公式Twitterアプリが必要です。</li>
+      <li>Twitterで送金: Phoreアドレスに直接支払う方法。請求額、Phoreアドレスを入力しTwitterで送金ボタンを押してください。公式Twitterアプリが必要です。</li>
+      <li>LINEで送金: Phoreアドレスに直接支払う方法。請求額、Phoreアドレスを入力しLINEで送金ボタンを押してください。SensuのLINE@と友達になっている必要があります。</li>
+    </ul>
     <p id="timeline">
       @tipsensuによるツイートです。ここからSensuが停止中か、それとも実行中かをご確認いただけます。<br>
       <a class="twitter-timeline" data-theme="dark" data-lang="ja" data-width="400" data-height="400" href="https://twitter.com/tipsensu?ref_src=twsrc%5Etfw">Tweets by tipsensu</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </p>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.2.0/iscroll.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script>
-    $(function() {
-      $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
-      .done(function(data) {
-        if (data[0].id) {
-          result = data[0].price_jpy;
-          var n = 1;
-          rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-          $('#rate').html("<b>"+rate+"</b>");
-        } else {
-          $('#rate').html('価格が取得できません。');
-        }
-      });
-      setInterval(function(){
-        $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/?convert=JPY')
-        .done(function(data) {
-          if (data[0].id) {
-            result = data[0].price_jpy;
-            var n = 1;
-            rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-            $('#rate').html("<b>"+rate+"</b>");
-          } else {
-            $('#rate').html('価格が取得できません。');
-          }
-        });
-      }, 10000);
-
-    $('#request').click(function() {
-      $("#qrcode").html("");
-      fee = $("#fee").val();
-      user = $("#user").val();
-      name = user.substr(1);
-      if(fee==""){
-        alert("請求額が入力されていません");
-      } else if(!fee.match(/^[0-9]+$/)) {
-        alert("請求額には数字のみ入力してください");
-      } else if(user=="") {
-        alert("支払い先アカウント名が入力されていません");
-      } else if(user.slice(0,1) != "@") {
-        alert("支払い先アカウント名は@から始まるものを入力してください");
-      } else if(!user.match(/^[@0-9a-zA-Z_]+$/)) {
-        alert("ユーザー名には半角英数字,アンダーバーのみが利用できます");
-      } else if(name.match(/[@]/)) {
-        alert("ユーザー名には半角英数字,アンダーバーのみが利用できます");
-      } else {
-        var n = 3;
-        var bill = fee / result;
-        var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
-        $('#bill').html("<b>"+charge+"</b>");
-        var message = "@tipsensu tip phr " + charge + " " + user;
-        var url = "twitter://post?message=" + encodeURIComponent(message);
-        $("#url").html(url);
-        $("#qrcode").qrcode({width: 200, height: 200, text: url});
-        var target = document.getElementById("twitter");
-        target.href = url;
-        target.innerText = "Twitterで支払う";
-      }
-    });
-
-    $(document).ready(function() {
-      $(".drawer").drawer();
-    });
-  });
-  </script>
+  <script src="js/min-jqlib.js"></script>
+  <script src="js/min-pay.js"></script>
 </body>
 </html>

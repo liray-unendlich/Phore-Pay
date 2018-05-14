@@ -1,0 +1,198 @@
+a {
+  font-weight: bold;
+  text-decoration: none;
+}
+a:link {
+  color: #95ccff;
+}
+a:visited {
+  color: #95ccff;
+}
+a.drawer-menu-item {
+  border-bottom: dashed 1px silver;
+  color:white;
+}
+.drawer-menu-item:hover {
+  color : #95ccff;
+}
+a.drawer-dropdown-menu-item {
+  color: white;
+}
+a.drawer-dropdown-menu-item:hover {
+  color: #95ccff;
+}
+a#twitter.link_button, a#addtwitter.link_button, a#line.link_button {
+  color : white;
+}
+div#qrcode, div#addqrcode, div#lineqrcode {
+  display: none;
+  padding: 5px;
+}
+.drawer-hamburger-icon {
+  background: #00d188;
+  padding: 0.5px;
+}
+.drawer-hamburger-icon:before {
+  background-color: #00d188;
+  height: 3px;
+}
+.drawer-hamburger-icon:after {
+  background-color: #00d188;
+  height: 3px;
+}
+ul.drawer-dropdown-menu {
+  background-color: #001366;
+}
+ul.drawer-menu li {
+  border-bottom: dashed 1px silver;
+}
+ul.drawer-dropdown-menu li {
+  border-bottom: dashed 1px silver;
+}
+ul.setting li {
+  list-style: none;
+  margin-top: 10px;
+  margin-left: -40px;
+}
+ul#sysdis li {
+  margin-left: -10px;
+}
+nav.drawer-nav {
+  color: white;
+  background-color: #001366;
+}
+.header{
+  position: relative;
+}
+.howpay, .settings {
+    position: relative;
+    margin: 2em 0;
+    padding: 1em 1em;
+    border: solid 3px #95ccff;
+    border-radius: 8px;
+    font-weight: bold;
+}
+.howpay {
+  margin-bottom: 20px;
+}
+.howpay .how-title, .settings .set-title {
+  background-color: #001428;
+  position: absolute;
+  display: inline-block;
+  top: -13px;
+  left: 10px;
+  padding: 0 9px;
+  line-height: 1;
+  font-size: 19px;
+  color: #95ccff;
+  font-weight: bold;
+}
+.howpay p, .settings p {
+    margin: 0;
+    padding: 0;
+}
+#how-string {
+  padding: 0;
+  margin: 0px 0px 0px 20px;
+}
+html {
+  color: white;
+  background-color: #001428;
+  font-size: 100%;
+  font-family: "Avenir", "Meiryo UI" ,'Osaka' , sans-serif;
+}
+input#fee {
+  width:50%;
+  height:30px;
+  font-size:1.3em;
+  line-height:30px;
+  vertical-align: middle;
+  position: relative;
+}
+input#user {
+  width:50%;
+  height:30px;
+  font-size:1.3em;
+  line-height:30px;
+  vertical-align: middle;
+  position: relative;
+}
+input#address {
+  width:calc( 50% - 50px );
+  height:30px;
+  font-size:1.3em;
+  line-height:30px;
+  vertical-align: middle;
+  position: relative;
+}
+input#reset {
+  font-size: 0.8em;
+  font-weight: bold;
+  background-color: #95ccff;
+  border: 2px solid #95ccff;
+  color: #fff;
+  margin-left: -10px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  }
+
+input#reset:hover {
+  background-color: #fff;
+  border-color: #95ccff;
+  color: #95ccff;
+}
+
+input#twrequest, input#addrequest, input#linerequest {
+  font-size: 1.4em;
+  font-weight: bold;
+  background-color: #00d188;
+  border: 2px solid #00d188;
+  color: #fff;
+  line-height: 50px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+input#twrequest:hover, input#addrequest:hover, input#linerequest:hover {
+  background-color: #fff;
+  border-color: #00d188;
+  color: #00d188;
+}
+label {
+  margin-right: -5px;
+  width: 30%;
+  float: left;
+}
+.link_button {
+  font-weight: bold;
+  text-decoration: none;
+  padding:5px 10px;
+  border-radius: 20px;
+  font-family: 'Avenir','Arial';
+}
+.link_button:hover {
+  background: white;
+  font-weight: bold;
+  border: 2px solid white;
+}
+#powered {
+  vertical-align: bottom;
+  font-size: 15px;
+  color: #55ACEE;
+}
+.settings {
+    font-size: 1.4em;
+    margin-top: 30px;
+}
+.title h1 {
+  border-bottom: 2px dashed #ffffff;
+  font-family: "Avenir", "Arial";
+  line-height: 1.4;
+  padding-bottom: 5px;
+}
+@media (min-width: 600px) {
+  font-size: calc(112.5% + 4 * (100vw - 600px) / 400)
+}
+@media (min-width: 1000px) {
+  font-size: calc(137.5%)
+}

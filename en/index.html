@@ -1,101 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Phore Pay | Pay with Phore</title>
-<meta name="author" content="Liray with Phore Blockchain">
-<meta name="description" content="Phore Pay serves intermadiate payment with Phore on Twitter, LINE for small shop and individuals.">
-<meta property="og:url" content="http://phorepay.xsrv.jp" />
-<meta property="og:title" content="Phore Pay" />
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes">
+<title>Phore Pay - Pay with Phore</title>
+<meta name="author" content="liray with Phore Blockchain">
+<meta name="description" content="Phore Pay helps payments with Phore on Twitter, LINE. ">
+<meta property="og:url" content="https://pay.phore.jp">
+<meta property="og:title" content="Phore Pay - Pay with Phore(en)">
 <meta property="og:type" content="article">
-<meta property="og:description" content="Phore Pay serves high speed intermadiate payment with Phore on Twitter, LINE for small shop and individuals." />
-<meta property="og:image" content="http://phorepay.xsrv.jp/logo.png" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@PhoreJapan" />
-<meta property="og:site_name" content="Phore Pay" />
-<meta property="og:locale" content="en" />
-<link rel="apple-touch-icon" sizes="180x180" href="http://phorepay.xsrv.jp/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://phorepay.xsrv.jp/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="http://phorepay.xsrv.jp/favicon-16x16.png">
-<link rel="manifest" href="http://phorepay.xsrv.jp/site.webmanifest">
-<link rel="mask-icon" href="http://phorepay.xsrv.jp/safari-pinned-tab.svg" color="#5bbad5">
+<meta property="og:description" content="Phore Pay helps payments with Phore on Twitter, LINE. " />
+<meta property="og:image" content="https://pay.phore.jp/logo.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@PhoreJapan">
+<meta property="og:site_name" content="Phore Pay - Pay with Phore(en)">
+<meta property="og:locale" content="en_US">
+<link rel="apple-touch-icon" sizes="180x180" href="https://pay.phore.jp/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://pay.phore.jp/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://pay.phore.jp/favicon-16x16.png">
+<link rel="manifest" href="https://pay.phore.jp/site.webmanifest">
+<link rel="mask-icon" href="https://pay.phore.jp/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#2b5797">
-<meta name="msapplication-TileImage" content="http://phorepay.xsrv.jp/mstile-144x144.png">
+<meta name="msapplication-TileImage" content="https://pay.phore.jp/mstile-144x144.png">
 <meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/css/drawer.min.css">
-<link rel="stylesheet" href="css/main.css">
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jquery.qrcode.min.js"></script>
-<script src="js/iscroll.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/drawer/3.2.2/js/drawer.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/min-style.css">
 </head>
 <style>
+div.twrequest {
+  margin-top: -20px;
+}
+div.linerequest {
+  margin-bottom: -10px;
+}
 #powered {
   vertical-align: bottom;
   font-size: 15px;
-  color: #55ACEE;
+  color: white;
+}
+.qrcode-text-btn {
+  display: none;
+  float: none;
+  margin-top: 8px;
+  position: absolute;
+  background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat;
+  height:1em;
+  width:1.7em;
+  margin-left: -2em;
+  cursor:pointer;
+}
+.qrcode-text {
+  padding-right:1.7em;
+  margin-right:0px;
+  margin-left: -7px;
+}
+.qrcode-text-btn > input[type=file] {
+  margin-left: -3em;
+  margin-top: 8px;
+  float:none;
+  position:absolute;
+  overflow:hidden;
+  width:1px;
+  height:1px;
+  opacity:0;
+}
+@media only screen and (max-device-width: 420px) {
+  input#fee, input#user {
+    width: 40%;
+  }
+  input#address {
+    width: calc( 0.40 * ( 100% - 2.84em ) );
+  }
+  .qrcode-text-btn {
+    display:inline-block;
+  }
+  ul.setting li {
+    float: left;
+  }
+}
+@media only screen and (max-device-width:780px) {
+  input#address {
+    width: calc( 0.40 * ( 100% - 2.8em ) );
+  }
+  input#fee, input#user {
+    width: 40%;
+  }
+  .qrcode-text-btn {
+    display:inline-block;
+  }
+}
+@media only screen and (max-device-width:1024px) {
+  input#address {
+    width: calc( 0.50 * ( 100% - 2.8em ) );
+  }
+  input#fee, input#user {
+    width: 50%;
+  }
+  .qrcode-text {
+    margin-left: -7px;
+    padding-right:1.7em;
+    margin-right:0px;
+  }
+  .qrcode-text-btn {
+    float: none;
+    margin-top: 8px;
+    position: absolute;
+    display:inline-block;
+    background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat;
+    height:1em;
+    width:1.7em;
+    margin-left: -2em;
+    cursor:pointer
+  }
+  .qrcode-text-btn > input[type=file] {
+    margin-left: -3em;
+    margin-top: 8px;
+    float:none;
+    position:absolute;
+    overflow:hidden;
+    width:1px;
+    height:1px;
+    opacity:0;
+  }
+}
+}
+#how-string {
+  padding: 0;
+  margin: 0px 0px 0px 20px;
 }
 </style>
-<script>
-  $(function() {
-    $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/')
-    .done(function(data) {
-      if (data[0].id) {
-        result = data[0].price_usd;
-        var n = 1;
-        rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-        $('#rate').html("<b>"+rate+"</b>");
-      } else {
-        $('#rate').html("Can't fetch phore/usd rate.");
-      }
-    });
-    setInterval(function(){
-      $.getJSON('https://api.coinmarketcap.com/v1/ticker/phore/')
-      .done(function(data) {
-        if (data[0].id) {
-          result = data[0].price_usd;
-          var n = 1;
-          rate = Math.floor(result * Math.pow(10, n)) / Math.pow(10, n);
-          $('#rate').html("<b>"+rate+"</b>");
-        } else {
-          $('#rate').html("Can't fetch phore/usd rate.");
-        }
-      });
-    }, 10000);
-  $('#request').click(function() {
-    if($("#fee").val()==""){
-      alert("No input");
-    } else if(!$("#fee").val().match(/^[0-9]+$/)) {
-      alert("Only numeral");
-    } else if($("#user").val()==""){
-      alert("No input");
-    }
-
-    var fee = $("#fee").val();
-    var n = 3;
-    var user = $("#user").val();
-    var bill = fee / result;
-    $("#qrcode").html("");
-    var charge = Math.ceil(bill * Math.pow(10, n)) / Math.pow(10, n);
-    $('#bill').html("<b>"+charge+"</b>");
-    var message = "@tipsensu tip phr " + charge + " " + user;
-    var url = "twitter://post?message=" + encodeURIComponent(message);
-    $("#url").html(url);
-    $("#qrcode").qrcode({width: 200, height: 200, text: url});
-    var target = document.getElementById("twitter");
-    target.href = url;
-    target.innerText = "Pay via Twitter";
-  });
-  $(document).ready(function() {
-    $(".drawer").drawer();
-  });
-});
-</script>
 <body class="drawer drawer--right">
   <header>
     <div class="title" font-family="Arial" font-size=4>
-      <img src="logo.png" width="40" height="46.4649" alt="Phore Pay" align="left" hspace="10"><h1 class="title">Phore Pay<span id ="powered"> by Twitter</span></h1>
+      <img src="../logo.png" width="40" height="46.4649" alt="Phore Pay" align="left" hspace="10"><h1 class="title">Phore Pay<span id ="powered"> by Sensu</span></h1>
     </div>
   </header>
   <header role="banner">
@@ -106,18 +141,17 @@
     <nav class="drawer-nav" role="navigation">
      <!-- ここからドロップダウンの中身 -->
      <ul class="drawer-menu">
-       <li><a class="drawer-menu-item" href="../index.html">TOP</a></li>
+       <li><a class="drawer-menu-item" href="index.html">TOP</a></li>
        <li class="drawer-dropdown">
-         <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Twitter<span class="drawer-caret"></span>
+         <a class="drawer-menu-item" href="#" data-toggle="dropdown" role="button" aria-expanded="false">User Guide in Japanese<span class="drawer-caret"></span>
          </a>
          <ul class="drawer-dropdown-menu">
-           <li><a class="drawer-dropdown-menu-item" href="index.html">Send to Account</a></li>
-           <li><a class="drawer-dropdown-menu-item" href="Twitter/index.html">Send to Address</a></li>
+           <li><a class="drawer-dropdown-menu-item" href="Guide/Buyer/index.html">For Buyer</a></li>
+           <li><a class="drawer-dropdown-menu-item" href="Guide/Seller/index.html">For Seller</a></li>
          </ul>
        </li>
-       <li><a class="drawer-menu-item" href="LINE/index.html">LINE</a></li>
        <li><a class="drawer-menu-item" href="https://phore.io">Phore Official</a></li>
-       <li><a class="drawer-menu-item" href="https://sensu.tip">Sensu Official</a></li>
+       <li><a class="drawer-menu-item" href="https://sensu.tips/?hl=en">Sensu Official</a></li>
        <li><a class="drawer-menu-item" href="../index.html">日本語</a></li>
      </ul>
      <!-- ここまでドロップダウンの中身 -->
@@ -126,46 +160,299 @@
   <div>
     Current Phore rate: <span id="rate"></span> USD
   </div>
-  <form>
+  <form data-persist="garlic">
     <div class="settings">
-      <span class="set-title">Payment Configuration</span>
+      <span class="set-title">Settings</span>
       <ul class="setting">
         <li class="fee" style="margin-top:-15px;">
-          <label for="fee">Charge</label>:&nbsp;<input id="fee" type="text" size="10">&nbsp;USD
+          <label for="fee">Fee</label>:&nbsp;<input id="fee" type="text" name="fee">
         </li>
         <li class="user">
-          <label for="user">To</label>:&nbsp;<input id="user" type="text" size="10">&nbsp;
+          <label for="user">Account</label>:&nbsp;<input id="user" type="text" name="username">
+        </li>
+        <li class="address">
+          <label for="address">Address</label>:&nbsp; <input id="address" type="text" name="address" class="qrcode-text"><label class="qrcode-text-btn"><input type=file accept="image/*" capture=environment onclick="return showQRIntro();" onchange="openQRCamera(this);" tabindex=-1></label>
         </li>
       </ul>
-      <p><big>Charge in Phore: <span id="bill"><b></b></span> PHR</big></p>
+      <input id="reset" type="reset" value="Reset">
+      <p><big>Bill: <span id="bill"><b></b></span> PHR</big></p>
     </div>
   </form>
-  <div>
-    <input id="request" type="button" value="Request" style="WIDTH:200px; HEIGHT:50px">
+  <div class="twrequest">
+    <input id="twrequest" type="button" value="Pay via Twitter" style="WIDTH:200px; HEIGHT:50px">
+  </div>
+  <div class="addrequest">
+    <input id="addrequest" type="button" value="Send via Twitter" style="WIDTH:200px; HEIGHT:50px">
+  </div>
+  <div class="linerequest">
+    <input id="linerequest" type="button" value="Send via LINE" style="WIDTH:200px; HEIGHT:50px">
   </div>
   <div class="howpay">
-    <span class="how-title">How To Pay</span>
-    <p>
-      1. Input amount of payment, destination(Twitter name).<br>
-      2. Click "Request" button<br>
-      3. If you are buyer<br>
-      　 Click "Pay via Twitter" button to pay.<br>
-      　 If no, Read below QR code and tweet.<br>
-      4. Check the payment in Reply in Twitter app.<br>
-    </p>
+    <span class="how-title">How To</span>
+    <ol id="how-string" start="0">
+      <li>Input Fee(USD), Account(Twitter account starts from @), Phore address(You can input via Reading QR)</li>
+      <li>Click payment button with your sending fund</li>
+      <li>If buyer opens this page<br>Click "Pay~" or "Send~" button<br>If no, please read QR<br></li>
+      <li>You can check the payment status on Twitter/LINE</li>
+      <li>Doesn't work?<a href="#timeline">Check Sensu's status</a></li>
+    </ol>
   </div>
   <div>
-    <a class="link_button" id="twitter"></a>
+    <a class="link_button" id="twitter" style="display:none; background-color: #55acee;"></a>
   </div>
-  <div id="qrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;margin-top:23px;"></div>
-
+  <div>
+    <a class="link_button" id="addtwitter" style="display:none; background-color:#55acee;"></a>
+  </div>
+  <div>
+    <a class="link_button" id="line" style="display:none; background-color:#5ae628;"></a>
+  </div>
+  <div id="qrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;margin-top:23px;display: none;"></div>
+  <div id="addqrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;margin-top:23px;display: none;"></div>
+  <div id="lineqrcode" style="width:200px;height:200px;border:#d0d0d0 dashed 5px;margin-top:23px;display: none;"></div>
   <div class="howpay">
     <span class="how-title">Description</span>
     <p>
-      This payment service uses <a href="https://sensu.tips/?hl=en">Sensu</a> . I'm glad to make this app for Sensu's developpers.<br>
-      Please check whether you agree with <a href="https://sensu.tips/terms?hl=en">Sensu's terms of service</a>.
-      Then check whether your Twitter account linked to Sensu.
+      Phore Pay uses <a href="https://sensu.tips/?hl=en">Sensu</a> tip platform. We are glad to Sensu's developpers.<br>
+      Please check whether you agreed<a href="https://sensu.tips/terms?hl=ja">Terms of Use</a>.
+      And check whether you linked <a href="https://sensu.tips/usage?hl=en">Twitter</a> via Sensu.<br>
+    </p>
+    <h4>description about payment</h4>
+    <ul id="sysdis" >
+      <li>Pay via Twitter: pay for Twitter account directly. Enter Fee, Account name and click "Pay via Twitter" button. You need official twitter application.</li>
+      <li>Send via Twitter: send your phore to other Phore address. Enter Fee, Phore address and click "Send via Twitter". You need official twitter application.</li>
+      <li>Send via LINE: send your phore to other Phore address. Enter Fee, Phore address and click "Send via LINE". You need to link Sensu on LINE.</li>
+    </ul>
+    <p id="timeline">
+      Tweet by @tipsensu. You can check whether sensu works or not.<br>
+      <a class="twitter-timeline" data-theme="dark" data-lang="en" data-width="400" data-height="400" href="https://twitter.com/tipsensu?ref_src=twsrc%5Etfw">Tweets by tipsensu</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     </p>
   </div>
+  <script src="../js/min-jqlib.js"></script>
+  <script>
+  $(function() {
+    $.getJSON("https://api.coinmarketcap.com/v1/ticker/phore/").done(function(a) {
+      if (a[0].id) {
+        result = a[0].price_usd;
+        var b = 1;
+        rate = Math.floor(result * Math.pow(10, b)) / Math.pow(10, b);
+        $("#rate").html("<b>" + rate + "</b>")
+      } else {
+        $("#rate").html("Can't fetch price.")
+      }
+    });
+    setInterval(function() {
+      $.getJSON("https://api.coinmarketcap.com/v1/ticker/phore/").done(function(a) {
+        if (a[0].id) {
+          result = a[0].price_usd;
+          var b = 1;
+          rate = Math.floor(result * Math.pow(10, b)) / Math.pow(10, b);
+          $("#rate").html("<b>" + rate + "</b>")
+        } else {
+          $("#rate").html("Can't fetch price.")
+        }
+      })
+    }, 10000);
+    $("#twrequest").click(function() {
+      $("#qrcode").html("");
+      $("#addqrcode").html("");
+      $("#lineqrcode").html("");
+      $("#qrcode").css("display", "none");
+      $("#addqrcode").css("display", "none");
+      $("#lineqrcode").css("display", "none");
+      $("#twitter").css("display", "none");
+      $("#addtwitter").css("display", "none");
+      $("#line").css("display", "none");
+      fee = $("#fee").val();
+      user = $("#user").val();
+      name = user.substr(1);
+      if (fee == "") {
+        alert("Input Fee")
+      } else {
+        if (!fee.match(/^[0-9]+$/)) {
+          alert("Fee is figure")
+        } else {
+          if (user == "") {
+            alert("Input account name")
+          } else {
+            if (user.slice(0, 1) != "@") {
+              alert("Account name starts @")
+            } else {
+              if (!user.match(/^[@0-9a-zA-Z_]+$/)) {
+                alert("There is something wrong with account name")
+              } else {
+                if (name.match(/[@]/)) {
+                  alert("There is something wrong with account name")
+                } else {
+                  var f = 3;
+                  var e = fee / result;
+                  var b = Math.ceil(e * Math.pow(10, f)) / Math.pow(10, f);
+                  $("#bill").html("<b>" + b + "</b>");
+                  var c = "@tipsensu tip phr " + b + " " + user;
+                  var a = "twitter://post?message=" + encodeURIComponent(c);
+                  $("#qrcode").css("background-color", "white");
+                  $("#qrcode").qrcode({
+                    width: 200,
+                    height: 200,
+                    foreground: "black",
+                    background: "white",
+                    text: a
+                  });
+                  $("#qrcode").css("display", "block");
+                  $("#twitter").css("display", "inline");
+                  var d = document.getElementById("twitter");
+                  d.href = a;
+                  d.innerText = "Pay via Twitter"
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+    $("#addrequest").click(function() {
+      $("#qrcode").html("");
+      $("#addqrcode").html("");
+      $("#lineqrcode").html("");
+      $("#qrcode").css("display", "none");
+      $("#addqrcode").css("display", "none");
+      $("#lineqrcode").css("display", "none");
+      $("#twitter").css("display", "none");
+      $("#addtwitter").css("display", "none");
+      $("#line").css("display", "none");
+      fee = $("#fee").val();
+      address = $("#address").val();
+      if (fee == "") {
+        alert("Input Fee")
+      } else {
+        if (!fee.match(/^[0-9]+$/)) {
+          alert("Fee is figure")
+        } else {
+          if (address == "") {
+            alert("Input Phore address")
+          } else {
+            if (!address.match(/^[0-9a-zA-Z]+$/)) {
+              alert("Phore address is invalid")
+            } else {
+              if (address.slice(0, 1) != "P") {
+                alert("Phore address starts P")
+              } else {
+                if (address.length != 34) {
+                  alert("Phore address is invalid")
+                } else {
+                  var f = 3;
+                  var e = fee / result;
+                  var b = Math.ceil(e * Math.pow(10, f)) / Math.pow(10, f);
+                  $("#bill").html("<b>" + b + "</b>");
+                  var c = "@tipsensu withdraw phr " + b + " " + address;
+                  var a = "twitter://post?message=" + encodeURIComponent(c);
+                  $("#addqrcode").css("background-color", "white");
+                  $("#addqrcode").qrcode({
+                    width: 200,
+                    height: 200,
+                    foreground: "black",
+                    background: "white",
+                    text: a
+                  });
+                  $("#addqrcode").css("display", "block");
+                  $("#addtwitter").css("display", "inline");
+                  var d = document.getElementById("addtwitter");
+                  d.href = a;
+                  d.innerText = "Send to Address"
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+    $("#linerequest").click(function() {
+      $("#qrcode").html("");
+      $("#addqrcode").html("");
+      $("#lineqrcode").html("");
+      $("#qrcode").css("display", "none");
+      $("#addqrcode").css("display", "none");
+      $("#lineqrcode").css("display", "none");
+      $("#twitter").css("display", "none");
+      $("#addtwitter").css("display", "none");
+      $("#line").css("display", "none");
+      fee = $("#fee").val();
+      user = $("#user").val();
+      name = user.substr(1);
+      address = $("#address").val();
+      if (fee == "") {
+        alert("Input Fee")
+      } else {
+        if (!fee.match(/^[0-9]+$/)) {
+          alert("Fee is figure")
+        } else {
+          if (address == "") {
+            alert("Input Phore address")
+          } else {
+            if (!address.match(/^[0-9a-zA-Z]+$/)) {
+              alert("Phore address is invalid")
+            } else {
+              if (address.slice(0, 1) != "P") {
+                alert("Phore address starts P")
+              } else {
+                if (address.length != 34) {
+                  alert("Phore address is invalid")
+                } else {
+                  var f = 3;
+                  var e = fee / result;
+                  var b = Math.ceil(e * Math.pow(10, f)) / Math.pow(10, f);
+                  $("#bill").html("<b>" + b + "</b>");
+                  var c = "./withdraw phr " + b + " " + address;
+                  var a = "twitter://post?message=" + encodeURIComponent(c);
+                  $("#lineqrcode").css("background-color", "white");
+                  $("#lineqrcode").qrcode({
+                    width: 200,
+                    height: 200,
+                    foreground: "black",
+                    background: "white",
+                    text: a
+                  });
+                  $("#lineqrcode").css("display", "block");
+                  $("#line").css("display", "inline");
+                  var d = document.getElementById("line");
+                  d.href = a;
+                  d.innerText = "Send via LINE"
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+    $(document).ready(function() {
+      $(".drawer").drawer()
+    });
+    $("#reset").click(function() {
+      return confirm("Do you want to reset the form?");
+      $("#fee").garlic();
+      $("#user").garlic();
+      $("#address").garlic()
+    })
+  });
+
+  function openQRCamera(b) {
+    var a = new FileReader();
+    a.onload = function() {
+      b.value = "";
+      qrcode.callback = function(c) {
+        if (c instanceof Error) {
+          alert("Can't find QR code.")
+        } else {
+          b.parentNode.previousElementSibling.value = c
+        }
+      };
+      qrcode.decode(a.result)
+    };
+    a.readAsDataURL(b.files[0])
+  }
+
+  function showQRIntro() {
+    return confirm("Take a photo the QR code with the camera")
+  };
+</script>
 </body>
 </html>
